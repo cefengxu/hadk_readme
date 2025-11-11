@@ -1,6 +1,6 @@
-site_name: HADK 文档
-site_description: HADK 框架开发文档 - 强大的智能体开发框架
-site_author: HADK Team
+site_name: HADK [Hybrid Agent Development Kit]
+site_description: HADK 框架开发文档 - 跨端轻量级智能体开发框架
+site_author: xufeng8@lenovo.com
 
 # 主题配置 - 使用 Material 主题
 theme:
@@ -60,5 +60,5 @@ site_dir: site
 strict: false
 
 # 版权信息
-copyright: Copyright &copy; 2024 HADK Team
+copyright: Copyright &copy; 2024 LATC CTOO Lenovo Group
 
