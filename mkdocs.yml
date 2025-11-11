@@ -1,0 +1,76 @@
+site_name: HADK 文档
+site_description: HADK 框架开发文档
+site_author: HADK Team
+
+# 主题配置
+theme:
+  name: material
+  language: zh
+  palette:
+    # 浅色模式
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    # 深色模式
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.annotate
+
+# 插件配置
+plugins:
+  - search
+  - mkdocs-material
+
+# 导航结构
+nav:
+  - 首页: index.md
+  - 基本概念:
+    - Chat Node: "1 基本概念 Chat Node.md"
+    - Tool Node: "2 基本概念 Tool Node.md"
+    - DIY Node: "3 基本概念 DIY Node.md"
+    - 路由 Route: "4 基本概念 路由 Route.md"
+    - 链和流 Chain Flow: "5 基本概念 链和流 Chain Flow.md"
+  - 应用开发:
+    - 单节点智能体: "6 应用开发 单节点智能体.md"
+    - 双节点智能体: "7 应用开发 双节点智能体.md"
+    - 三节点智能体: "8 应用开发 三节点智能体.md"
+
+# Markdown 扩展
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+
+# 仓库信息（可选）
+# repo_name: hadk
+# repo_url: https://github.com/your-org/hadk
+# edit_uri: edit/main/docs/
+
