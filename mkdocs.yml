@@ -1,23 +1,22 @@
 site_name: HADK 文档
-site_description: HADK 框架开发文档
+site_description: HADK 框架开发文档 - 强大的智能体开发框架
 site_author: HADK Team
 
-# 主题配置
+# 主题配置 - 使用 Material 主题
 theme:
   name: material
-  language: zh
   palette:
     # 浅色模式
     - scheme: default
-      primary: blue
-      accent: blue
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-7
         name: 切换到深色模式
     # 深色模式
     - scheme: slate
-      primary: blue
-      accent: blue
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-4
         name: 切换到浅色模式
@@ -29,11 +28,7 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.annotate
-
-# 插件配置
-plugins:
-  - search
-  - mkdocs-material
+    - content.code.copy
 
 # 导航结构
 nav:
@@ -49,28 +44,21 @@ nav:
     - 双节点智能体: "7 应用开发 双节点智能体.md"
     - 三节点智能体: "8 应用开发 三节点智能体.md"
 
-# Markdown 扩展
-markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
-  - tables
-  - attr_list
-  - md_in_html
+# 插件配置
+plugins:
+  - search
+  - minify:
+      minify_html: true
 
-# 仓库信息（可选）
-# repo_name: hadk
-# repo_url: https://github.com/your-org/hadk
-# edit_uri: edit/main/docs/
+# 文档目录
+docs_dir: docs
+
+# 站点目录（构建输出）
+site_dir: site
+
+# 严格模式（检查链接）
+strict: false
+
+# 版权信息
+copyright: Copyright &copy; 2024 HADK Team
 
