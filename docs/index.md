@@ -1,10 +1,25 @@
-# HADK [Hybrid Agent Development Kit] 开发文档
+# HADK [ Hybrid Agent Development Kit ] 开发文档
 
 欢迎来到 HADK 框架开发文档！
 
-## 简介
+## 他是什么
 
-HADK 是一个强大的智能体开发框架，提供了丰富的节点组件和工作流管理功能。
+**HADK (Hybrid Agent Development Kit)** 是一个基于 C++ 实现的跨平台智能体开发套件，基于《数据结构》中描述的计算图概念，为开发者提供一套完整的、模块化的智能体构建框架。通过提供丰富的功能节点和灵活的节点编排机制，开发者可以快速构建具备复杂推理能力、工具调用能力和多模态交互能力的多平台适配智能体应用。
+
+## 他的优势
+
+- **跨平台**：同一份代码支持 Windows、Linux、Android，统一 API
+- **节点化架构**：基于计算图的流程编排，支持条件路由、嵌套流、自循环
+- **类型安全**：C++ 模板实现编译期类型检查，减少运行时错误
+- **高性能**：原生编译，零拷贝优化，支持并发处理
+- **工具生态**：支持本地工具、远程工具服务器（MCP/SSE）和自定义工具
+- **模块化**：组件职责清晰，易于扩展和复用
+
+## 开发环境
+
+- **C++ 编译器**：支持 C++17 或更高版本
+- **CMake**：3.24 或更高版本
+- **操作系统**：Windows 10+、Linux (Ubuntu 20.04+)、Android (API 21+)
 
 ## 快速开始
 
@@ -25,3 +40,17 @@ HADK 是一个强大的智能体开发框架，提供了丰富的节点组件和
 ## 开始使用
 
 请从左侧导航栏选择您感兴趣的章节开始阅读。
+
+## 致谢
+
+感谢以下开源项目的支持：
+
+- [cpr](https://github.com/libcpr/cpr) - HTTP 客户端
+- [nlohmann/json](https://github.com/nlohmann/json) - JSON 库
+- [spdlog](https://github.com/gabime/spdlog) - 日志库
+- [yaml-cpp](https://github.com/jbeder/yaml-cpp) - YAML 解析库
+- [inja](https://github.com/pantor/inja) - 模板引擎
+
+## 联系方式
+
+- **邮件联系**：xufeng8@lenovo.com
