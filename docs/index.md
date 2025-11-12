@@ -1,4 +1,4 @@
-# HADK [ Hybrid Agent Development Kit ] 开发文档
+# HADK 开发文档
 
 欢迎来到 HADK 框架开发文档！
 
