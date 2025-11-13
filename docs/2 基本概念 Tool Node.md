@@ -13,7 +13,7 @@ Tool Node 是一个工具管理节点，支持以下功能：
 本地工具开发规范请参考`本地工具开发规范`。
 
 ```c++
-tool_node::tool_node::add_function_call<search_news_tool>(
+common_tools::tools::add_function_call(search_news_tool,
     R"({"type":"function","function":{"name":"search_news","description":"搜索最新新闻信息","parameters":{"type":"object","properties":{"query":{"type":"string","description":"搜索关键词","minLength":1},"time_range":{"type":"string","enum":["day","week"]},"country":{"type":"string","enum":["china","usa","japan"]}},"required":["query"]}}})"
 );
 ```
@@ -21,7 +21,7 @@ tool_node::tool_node::add_function_call<search_news_tool>(
 ### 注册 MCP 工具
 
 ```c++
-const auto r1 = tool_node::tool_node::add_server(
+const auto r1 = common_tools::tools::add_server(
     R"({"WeatherServer":{"url":"http://18.119.131.41:8006","sse_endpoint":"/sse"}})"
 );
 ```
@@ -31,7 +31,7 @@ const auto r1 = tool_node::tool_node::add_server(
 获取 MCP 工具初始化状态的函数如下：
 
 ```c++
-int status = tool_node::tool_node::get_server_init_status(std::string(name));
+int status = common_tools::tools::get_server_init_status(std::string(name));
 ```
 
 **参数说明：**
@@ -48,7 +48,7 @@ int status = tool_node::tool_node::get_server_init_status(std::string(name));
 关闭所有 MCP 工具的函数如下：
 
 ```c++
-tool_node::tool_node::shutdown_all_servers();
+common_tools::tools::shutdown_all_servers();
 ```
 
 ## 执行工具
@@ -63,8 +63,8 @@ s.model = "gpt-4o-mini";
 s.temperature = 0.7;
 s.max_tokens = 4096;
 s.tool_choice = "auto";  // 启用自动工具选择
-s.tools_json = tool_node::tool_node::get_all_tools_json();  // 获取所有已注册工具
-const auto node = std::make_shared<chat_node::EchoChatNode<std::string, std::string>>(s);
+s.tools_json = common_tools::tools::get_all_tools_json();  // 获取所有已注册工具
+const auto node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(s);
 ```
 
 ### 手动调用指定工具
@@ -72,7 +72,7 @@ const auto node = std::make_shared<chat_node::EchoChatNode<std::string, std::str
 通过以下方式手动执行指定工具：
 
 ```c++
-std::string ws_out = tool_node::tool_node::call_tool("search_web2", ws_in_json.dump());
+std::string ws_out = common_tools::tools::call_tool("search_web2", ws_in_json.dump());
 ```
 
 ### 工具输入格式
@@ -96,7 +96,7 @@ params["time_range"] = "day";
 params["country"] = "china";
 std::string arguments = params.dump();
 
-std::string result = tool_node::tool_node::call_tool("search_news", arguments);
+std::string result = common_tools::tools::call_tool("search_news", arguments);
 ```
 
 本地工具开发规范请参考`本地工具开发规范`。
@@ -124,7 +124,7 @@ std::string result = tool_node::tool_node::call_tool("search_news", arguments);
 **示例代码：**
 
 ```c++
-std::string result = tool_node::tool_node::call_tool("search_news", arguments);
+std::string result = common_tools::tools::call_tool("search_news", arguments);
 nlohmann::json result_json = nlohmann::json::parse(result);
 
 if (!result_json["isError"].get<bool>()) {

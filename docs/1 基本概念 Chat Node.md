@@ -13,7 +13,7 @@ s_generate.temperature = 0.7;
 s_generate.top_p = 0.95;
 s_generate.max_tokens = 4096;
 s_generate.tool_choice = "none";
-const auto generate_node = std::make_shared<chat_node::EchoChatNode<std::string, std::string>>(s_generate);
+const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(s_generate);
 ```
 
 ## Chat Node 节点的输入输出
