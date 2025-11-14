@@ -1,4 +1,4 @@
-site_name: HADK [Hybrid Agent Development Kit]
+site_name: HADK
 site_description: HADK 框架开发文档 - 跨端轻量级智能体开发框架
 site_author: xufeng8@lenovo.com
 
@@ -8,15 +8,15 @@ theme:
   palette:
     # 浅色模式
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: pink
+      accent: pink
       toggle:
         icon: material/brightness-7
         name: 切换到深色模式
     # 深色模式
     - scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: pink
+      accent: pink
       toggle:
         icon: material/brightness-4
         name: 切换到浅色模式

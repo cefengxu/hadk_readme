@@ -54,4 +54,7 @@
 
 ## 联系方式
 
-- **邮件联系**：xufeng8@lenovo.com
+- **邮件联系**：
+  - liusong9@lenovo.com
+  - zengjl1@lenovo.com
+  - xufeng8@lenovo.com
