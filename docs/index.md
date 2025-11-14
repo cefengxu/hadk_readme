@@ -53,8 +53,6 @@
 - [inja](https://github.com/pantor/inja) - 模板引擎
 
 ## 联系方式
-
-- **邮件联系**：
   - liusong9@lenovo.com
   - zengjl1@lenovo.com
   - xufeng8@lenovo.com
