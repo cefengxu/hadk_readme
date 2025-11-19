@@ -31,6 +31,58 @@ const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std
 ]
 ```
 
+同时，也支持输入多模态的信息（如果模型支持的话）：
+
+```json
+[
+    {
+        "content": "You are a helpful assistant with multiple tools.",
+        "role": "system"
+    },
+    {
+        "content": [
+            {
+                "text": "what is this?",
+                "type": "text"
+            },
+            {
+                "image_url": {
+                    "detail": "low",
+                    "url": "https://1.bp.blogspot.com/529.jpg"
+                },
+                "type": "image_url"
+            }
+        ],
+        "role": "user"
+    }
+]
+```
+亦可，基于base64格式表示图片内容：
+```json
+[
+    {
+        "content": "You are a helpful assistant with multiple tools.",
+        "role": "system"
+    },
+    {
+        "content": [
+            {
+                "text": "what is this?",
+                "type": "text"
+            },
+            {
+                "image_url": {
+                    "detail": "low",
+                    "url": "data:image/png;base64,dfadfnakjenqlkmdcklasjdflkadslfkadsokfqmldf"
+                },
+                "type": "image_url"
+            }
+        ],
+        "role": "user"
+    }
+]
+```
+
 ### 输出格式
 
 输出数据结构严格遵循 OpenAI Chat Completion API 规范，格式如下：
