@@ -9,6 +9,28 @@ const auto generate_node = std::make_shared&lt;chat_node::ChatNode&lt;std::strin
   {&quot;role&quot;:&quot;system&quot;,&quot;content&quot;:&quot;you are a helpful assistant&quot;},
   {&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;who are you?&quot;}
 ]
+</code></pre> <pre><code class=language-json>[
+    {
+        &quot;content&quot;: &quot;You are a helpful assistant with multiple tools.&quot;,
+        &quot;role&quot;: &quot;system&quot;
+    },
+    {
+        &quot;content&quot;: [
+            {
+                &quot;text&quot;: &quot;what is this?&quot;,
+                &quot;type&quot;: &quot;text&quot;
+            },
+            {
+                &quot;image_url&quot;: {
+                    &quot;detail&quot;: &quot;low&quot;,
+                    &quot;url&quot;: &quot;https://1.bp.blogspot.com/529.jpg&quot;
+                },
+                &quot;type&quot;: &quot;image_url&quot;
+            }
+        ],
+        &quot;role&quot;: &quot;user&quot;
+    }
+]
 </code></pre> <h3 id=_2>输出格式</h3> <p>输出数据结构严格遵循 OpenAI Chat Completion API 规范，格式如下：</p> <pre><code class=language-json>[
   {&quot;role&quot;:&quot;system&quot;,&quot;content&quot;:&quot;you are a helpful assistant&quot;},
   {&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;who are you?&quot;},
