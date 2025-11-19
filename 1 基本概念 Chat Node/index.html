@@ -9,7 +9,7 @@ const auto generate_node = std::make_shared&lt;chat_node::ChatNode&lt;std::strin
   {&quot;role&quot;:&quot;system&quot;,&quot;content&quot;:&quot;you are a helpful assistant&quot;},
   {&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;who are you?&quot;}
 ]
-</code></pre> <pre><code class=language-json>[
+</code></pre> <p>同时，也支持输入多模态的信息（如果模型支持的话）：</p> <pre><code class=language-json>[
     {
         &quot;content&quot;: &quot;You are a helpful assistant with multiple tools.&quot;,
         &quot;role&quot;: &quot;system&quot;
@@ -24,6 +24,28 @@ const auto generate_node = std::make_shared&lt;chat_node::ChatNode&lt;std::strin
                 &quot;image_url&quot;: {
                     &quot;detail&quot;: &quot;low&quot;,
                     &quot;url&quot;: &quot;https://1.bp.blogspot.com/529.jpg&quot;
+                },
+                &quot;type&quot;: &quot;image_url&quot;
+            }
+        ],
+        &quot;role&quot;: &quot;user&quot;
+    }
+]
+</code></pre> <p>亦可，基于base64格式表示图片内容：</p> <pre><code class=language-json>[
+    {
+        &quot;content&quot;: &quot;You are a helpful assistant with multiple tools.&quot;,
+        &quot;role&quot;: &quot;system&quot;
+    },
+    {
+        &quot;content&quot;: [
+            {
+                &quot;text&quot;: &quot;what is this?&quot;,
+                &quot;type&quot;: &quot;text&quot;
+            },
+            {
+                &quot;image_url&quot;: {
+                    &quot;detail&quot;: &quot;low&quot;,
+                    &quot;url&quot;: &quot;data:image/png;base64,dfadfnakjenqlkmdcklasjdflkadslfkadsokfqmldf&quot;
                 },
                 &quot;type&quot;: &quot;image_url&quot;
             }
