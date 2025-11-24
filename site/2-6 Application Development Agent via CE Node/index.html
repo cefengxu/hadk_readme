@@ -1,0 +1,264 @@
+<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="HADK 框架开发文档 - 跨端轻量级智能体开发框架"><meta name=author content=xufeng8@lenovo.com><link href=../2-5%20Application%20Development%20Inja%20Template%20Formatting/ rel=prev><link rel=icon href=../assets/images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.7.0"><title>Agent via CE Node - HADK</title><link rel=stylesheet href=../assets/stylesheets/main.618322db.min.css><link rel=stylesheet href=../assets/stylesheets/palette.ab4e12ef.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=pink data-md-color-accent=pink> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#context-compression-agent-development-example class=md-skip> Skip to content </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=Header> <a href=.. title=HADK class="md-header__button md-logo" aria-label=HADK data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> HADK </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> Agent via CE Node </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=pink data-md-color-accent=pink aria-label="Dark Mode" type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title="Dark Mode" for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=pink data-md-color-accent=pink aria-label="Light Mode" type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title="Light Mode" for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=Search> <button type=reset class="md-search__icon md-icon" title=Clear aria-label=Clear tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=Tabs data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=.. class=md-tabs__link> Home </a> </li> <li class=md-tabs__item> <a href=../1-1%20Basic%20Concepts%20Chat%20Node/ class=md-tabs__link> Basic Concepts </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../2-1%20Application%20Development%20Single%20Node%20Agent/ class=md-tabs__link> Application Development </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=.. title=HADK class="md-nav__button md-logo" aria-label=HADK data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> HADK </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=.. class=md-nav__link> <span class=md-ellipsis> Home </span> </a> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2> <label class=md-nav__link for=__nav_2 id=__nav_2_label tabindex=0> <span class=md-ellipsis> Basic Concepts </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2> <span class="md-nav__icon md-icon"></span> Basic Concepts </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1-1%20Basic%20Concepts%20Chat%20Node/ class=md-nav__link> <span class=md-ellipsis> Chat Node </span> </a> </li> <li class=md-nav__item> <a href=../1-2%20Basic%20Concepts%20Tool%20Node/ class=md-nav__link> <span class=md-ellipsis> Tool Node </span> </a> </li> <li class=md-nav__item> <a href=../1-3%20Basic%20Concepts%20DIY%20Node/ class=md-nav__link> <span class=md-ellipsis> Custom Node </span> </a> </li> <li class=md-nav__item> <a href=../1-4%20Basic%20Concepts%20CE%20Node/ class=md-nav__link> <span class=md-ellipsis> CE Node </span> </a> </li> <li class=md-nav__item> <a href=../1-5%20Basic%20Concepts%20Chain%20Flow/ class=md-nav__link> <span class=md-ellipsis> Chain and Flow </span> </a> </li> <li class=md-nav__item> <a href=../6%20Basic%20Concepts%20Route/ class=md-nav__link> <span class=md-ellipsis> Route </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3 checked> <label class=md-nav__link for=__nav_3 id=__nav_3_label tabindex> <span class=md-ellipsis> Application Development </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=true> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> Application Development </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../2-1%20Application%20Development%20Single%20Node%20Agent/ class=md-nav__link> <span class=md-ellipsis> Single Node Agent </span> </a> </li> <li class=md-nav__item> <a href=../2-2%20Application%20Development%20Two%20Node%20Agent/ class=md-nav__link> <span class=md-ellipsis> Two Node Agent </span> </a> </li> <li class=md-nav__item> <a href=../2-3%20Application%20Development%20Three%20Node%20Agent/ class=md-nav__link> <span class=md-ellipsis> Three Node Agent </span> </a> </li> <li class=md-nav__item> <a href=../2-4%20Application%20Development%20Conditional%20Routing%20Agent%20with%20Tool%20Node/ class=md-nav__link> <span class=md-ellipsis> Agent with Specified Tools </span> </a> </li> <li class=md-nav__item> <a href=../2-5%20Application%20Development%20Inja%20Template%20Formatting/ class=md-nav__link> <span class=md-ellipsis> Inja Template Formatting </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> Agent via CE Node </span> <span class="md-nav__icon md-icon"></span> </label> <a href=./ class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> Agent via CE Node </span> </a> <nav class="md-nav md-nav--secondary" aria-label="Table of contents"> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> Table of contents </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#overview class=md-nav__link> <span class=md-ellipsis> Overview </span> </a> </li> <li class=md-nav__item> <a href=#development-steps class=md-nav__link> <span class=md-ellipsis> Development Steps </span> </a> <nav class=md-nav aria-label="Development Steps"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#1-register-tools class=md-nav__link> <span class=md-ellipsis> 1. Register Tools </span> </a> </li> <li class=md-nav__item> <a href=#2-configure-ce-node-context-engine-node class=md-nav__link> <span class=md-ellipsis> 2. Configure CE Node (Context Engine Node) </span> </a> </li> <li class=md-nav__item> <a href=#3-configure-ce-node-postprocessing-and-routing class=md-nav__link> <span class=md-ellipsis> 3. Configure CE Node Postprocessing and Routing </span> </a> </li> <li class=md-nav__item> <a href=#4-configure-generate-node class=md-nav__link> <span class=md-ellipsis> 4. Configure Generate Node </span> </a> </li> <li class=md-nav__item> <a href=#5-configure-generate-node-preprocessing-postprocessing-and-routing class=md-nav__link> <span class=md-ellipsis> 5. Configure Generate Node Preprocessing, Postprocessing, and Routing </span> </a> </li> <li class=md-nav__item> <a href=#6-configure-polish-node class=md-nav__link> <span class=md-ellipsis> 6. Configure Polish Node </span> </a> </li> <li class=md-nav__item> <a href=#7-configure-polish-node-preprocessing-and-postprocessing class=md-nav__link> <span class=md-ellipsis> 7. Configure Polish Node Preprocessing and Postprocessing </span> </a> </li> <li class=md-nav__item> <a href=#8-connect-nodes class=md-nav__link> <span class=md-ellipsis> 8. Connect Nodes </span> </a> </li> <li class=md-nav__item> <a href=#9-create-workflow-and-execute class=md-nav__link> <span class=md-ellipsis> 9. Create Workflow and Execute </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#complete-example class=md-nav__link> <span class=md-ellipsis> Complete Example </span> </a> </li> <li class=md-nav__item> <a href=#key-points class=md-nav__link> <span class=md-ellipsis> Key Points </span> </a> </li> <li class=md-nav__item> <a href=#use-cases class=md-nav__link> <span class=md-ellipsis> Use Cases </span> </a> </li> <li class=md-nav__item> <a href=#differences-from-conditional-routing-agent class=md-nav__link> <span class=md-ellipsis> Differences from Conditional Routing Agent </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label="Table of contents"> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> Table of contents </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#overview class=md-nav__link> <span class=md-ellipsis> Overview </span> </a> </li> <li class=md-nav__item> <a href=#development-steps class=md-nav__link> <span class=md-ellipsis> Development Steps </span> </a> <nav class=md-nav aria-label="Development Steps"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#1-register-tools class=md-nav__link> <span class=md-ellipsis> 1. Register Tools </span> </a> </li> <li class=md-nav__item> <a href=#2-configure-ce-node-context-engine-node class=md-nav__link> <span class=md-ellipsis> 2. Configure CE Node (Context Engine Node) </span> </a> </li> <li class=md-nav__item> <a href=#3-configure-ce-node-postprocessing-and-routing class=md-nav__link> <span class=md-ellipsis> 3. Configure CE Node Postprocessing and Routing </span> </a> </li> <li class=md-nav__item> <a href=#4-configure-generate-node class=md-nav__link> <span class=md-ellipsis> 4. Configure Generate Node </span> </a> </li> <li class=md-nav__item> <a href=#5-configure-generate-node-preprocessing-postprocessing-and-routing class=md-nav__link> <span class=md-ellipsis> 5. Configure Generate Node Preprocessing, Postprocessing, and Routing </span> </a> </li> <li class=md-nav__item> <a href=#6-configure-polish-node class=md-nav__link> <span class=md-ellipsis> 6. Configure Polish Node </span> </a> </li> <li class=md-nav__item> <a href=#7-configure-polish-node-preprocessing-and-postprocessing class=md-nav__link> <span class=md-ellipsis> 7. Configure Polish Node Preprocessing and Postprocessing </span> </a> </li> <li class=md-nav__item> <a href=#8-connect-nodes class=md-nav__link> <span class=md-ellipsis> 8. Connect Nodes </span> </a> </li> <li class=md-nav__item> <a href=#9-create-workflow-and-execute class=md-nav__link> <span class=md-ellipsis> 9. Create Workflow and Execute </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#complete-example class=md-nav__link> <span class=md-ellipsis> Complete Example </span> </a> </li> <li class=md-nav__item> <a href=#key-points class=md-nav__link> <span class=md-ellipsis> Key Points </span> </a> </li> <li class=md-nav__item> <a href=#use-cases class=md-nav__link> <span class=md-ellipsis> Use Cases </span> </a> </li> <li class=md-nav__item> <a href=#differences-from-conditional-routing-agent class=md-nav__link> <span class=md-ellipsis> Differences from Conditional Routing Agent </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=context-compression-agent-development-example>Context Compression Agent Development Example</h1> <h2 id=overview>Overview</h2> <p>The context compression agent demonstrates how to use HADK's CE Node (Context Engine Node) and Chat Node to build an agent that supports long conversation history. This example implements an intelligent assistant that automatically compresses and manages conversation context, avoiding context window limits through context compression while supporting tool invocation and answer polishing.</p> <p><strong>Workflow Diagram:</strong></p> <pre><code>Input → ce_node (Context Engine Node) → generate_node (Generate Answer/Tool Call) → polish_node (Polish Answer) → Output
+</code></pre> <p><strong>Core Features:</strong> - <strong>Context Compression</strong>: Uses CE Node to automatically compress long conversation history, avoiding model context window limits - <strong>Tool Invocation</strong>: Generate Node supports automatic tool invocation (e.g., web search) - <strong>Answer Polishing</strong>: Polish Node polishes the final answer - <strong>Linear Workflow</strong>: Simple chain structure, easy to understand and maintain</p> <h2 id=development-steps>Development Steps</h2> <h3 id=1-register-tools>1. Register Tools</h3> <p>First, register the required tools. This example registers two search tools: <code>search_news</code> and <code>search_web2</code>:</p> <pre><code class=language-c++>#include &lt;tools.h&gt;
+#include &lt;web_search.h&gt;
+
+// Register tools in initialization function
+common_tools::tools::add_function_call(search_news_tool,
+    R&quot;({&quot;type&quot;:&quot;function&quot;,&quot;function&quot;:{&quot;name&quot;:&quot;search_news&quot;,&quot;description&quot;:&quot;Search the web using keywords to get the latest, time-sensitive information such as weather and news, supporting filtering by time range, country, etc. to get web content, titles, and link information&quot;,&quot;parameters&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;query&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Search query string used to search for relevant information on the web. Keyword combinations should be concise and clear, avoiding redundant information while ensuring they accurately reflect the core needs of the user's question. Keyword combinations should conform to search engine syntax and logical rules&quot;,&quot;minLength&quot;:1},&quot;time_range&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Time range used to limit search results from a specific time&quot;,&quot;enum&quot;:[&quot;day&quot;,&quot;week&quot;]},&quot;country&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Region name (must be in English) used to limit search results from a specific region&quot;,&quot;enum&quot;:[&quot;china&quot;,&quot;usa&quot;,&quot;japan&quot;,&quot;...&quot;]}},&quot;required&quot;:[&quot;query&quot;]}}})&quot;
+);
+
+common_tools::tools::add_function_call(search_web_tool,
+    R&quot;({&quot;type&quot;:&quot;function&quot;,&quot;function&quot;:{&quot;name&quot;:&quot;search_web2&quot;,&quot;description&quot;:&quot;Search the web using keywords to get general information that doesn't change over time, supporting filtering by country, etc. to get web content, titles, and link information&quot;,&quot;parameters&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;query&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Search query string used to search for relevant information on the web. Keyword combinations should be concise and clear, avoiding redundant information while ensuring they accurately reflect the core needs of the user's question. Keyword combinations should conform to search engine syntax and logical rules&quot;,&quot;minLength&quot;:1},&quot;country&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Country name (must be in English) used to limit search results from a specific country&quot;,&quot;enum&quot;:[&quot;china&quot;,&quot;usa&quot;,&quot;japan&quot;,&quot;...&quot;]}},&quot;required&quot;:[&quot;query&quot;]}}})&quot;
+);
+</code></pre> <h3 id=2-configure-ce-node-context-engine-node>2. Configure CE Node (Context Engine Node)</h3> <p>CE Node is responsible for compressing and managing conversation history to avoid exceeding model context window limits:</p> <pre><code class=language-c++>#include &lt;ce_node.h&gt;
+#include &lt;hybrid_llm.h&gt;
+
+ce_node::ce_node_settings s_ce;
+
+// Configure summarization strategy (recommended for long conversations)
+s_ce.strategy = ContextStrategy::SUMMARIZING;
+s_ce.context_limit = 3; // Compression trigger threshold, number of history turns
+s_ce.keep_last_n_turns = 1; // Number of recent original message turns to keep
+s_ce.tool_trim_limit = 600; // Number of characters to keep for tool results in history messages
+s_ce.summarizer_model = &quot;gpt-4o-mini&quot;;
+s_ce.summarizer_max_tokens = 400;
+
+// Or use trimming strategy (simple but may lose information)
+// s_ce.strategy = ContextStrategy::TRIMMING;
+// s_ce.max_turns = 3; // Maximum number of history turns to keep
+
+const auto ce_node = std::make_shared&lt;ce_node::CeNode&lt;std::string, std::string&gt;&gt;(s_ce);
+</code></pre> <p><strong>Parameter Description:</strong> - <code>strategy</code>: Context management strategy, <code>SUMMARIZING</code> (summarization) or <code>TRIMMING</code> (trimming) - <code>context_limit</code>: Compression trigger threshold, triggers summarization compression when history turns exceed this value - <code>keep_last_n_turns</code>: Number of recent original message turns to keep, these messages won't be compressed - <code>tool_trim_limit</code>: Number of characters to keep for tool results in history messages - <code>summarizer_model</code>: Model name for summarization - <code>summarizer_max_tokens</code>: Maximum tokens for summarizer model - <code>max_turns</code>: Maximum number of history turns to keep (when using <code>TRIMMING</code> strategy)</p> <h3 id=3-configure-ce-node-postprocessing-and-routing>3. Configure CE Node Postprocessing and Routing</h3> <p>Set postprocessor function for logging and configure routing to generate node:</p> <pre><code class=language-c++>route(ce_node, [&amp;](const std::string&amp;, const std::string&amp; output) -&gt; std::optional&lt;std::string&gt; {
+    return &quot;generate&quot;; // Always route to generate node
+});
+</code></pre> <h3 id=4-configure-generate-node>4. Configure Generate Node</h3> <p>Generate Node is responsible for generating answers and supports automatic tool invocation:</p> <pre><code class=language-c++>#include &lt;chat_node.h&gt;
+
+chat_node::chat_node_settings s_generate;
+s_generate.model = &quot;gpt-4o-mini&quot;;
+s_generate.temperature = 0.7;
+s_generate.top_p = 0.95;
+s_generate.max_tokens = 4096;
+s_generate.tool_choice = &quot;auto&quot;; // Automatically choose whether to invoke tools
+s_generate.tools_json = common_tools::tools::get_all_tools_json(); // Get all registered tools
+
+const auto generate_node = std::make_shared&lt;chat_node::ChatNode&lt;std::string, std::string&gt;&gt;(s_generate);
+</code></pre> <p><strong>Configuration Notes:</strong> - <code>tool_choice = "auto"</code>: Allows the model to automatically decide whether to invoke tools - <code>tools_json</code>: Pass in all registered tools, the model can invoke them as needed</p> <h3 id=5-configure-generate-node-preprocessing-postprocessing-and-routing>5. Configure Generate Node Preprocessing, Postprocessing, and Routing</h3> <p>Generate Node's preprocessor and postprocessor functions can be used for data transformation and logging:</p> <pre><code class=language-c++>generate_node-&gt;setPreprocessor([](const std::string&amp; in) -&gt; std::string {
+    // Pass input directly without modification
+    // Can also perform data transformation or validation here
+    return in;
+});
+
+generate_node-&gt;setPostprocessor([](const std::string&amp; output) -&gt; std::string {
+    // Pass output directly without modification
+    // Can also perform result processing or logging here
+    return output;
+});
+
+route(generate_node, [&amp;](const std::string&amp;, const std::string&amp; output) -&gt; std::optional&lt;std::string&gt; {
+    return &quot;polish&quot;; // Always route to polish node
+});
+</code></pre> <h3 id=6-configure-polish-node>6. Configure Polish Node</h3> <p>Polish Node is responsible for polishing the final answer:</p> <pre><code class=language-c++>chat_node::chat_node_settings s_polish;
+s_polish.model = &quot;gpt-4o-mini&quot;;
+s_polish.temperature = 0.7;
+s_polish.top_p = 0.95;
+s_polish.max_tokens = 4096;
+s_polish.tool_choice = &quot;none&quot;; // Polish node doesn't need tool invocation
+
+const auto polish_node = std::make_shared&lt;chat_node::ChatNode&lt;std::string, std::string&gt;&gt;(s_polish);
+</code></pre> <h3 id=7-configure-polish-node-preprocessing-and-postprocessing>7. Configure Polish Node Preprocessing and Postprocessing</h3> <p>Polish Node's preprocessor function builds the polishing prompt:</p> <pre><code class=language-c++>polish_node-&gt;setPreprocessor([](const std::string&amp; in) -&gt; std::string {
+    nlohmann::json inJson = nlohmann::json::parse(in);
+
+    // Extract content of the last message
+    std::string _content = inJson.back()[&quot;content&quot;].get&lt;std::string&gt;();
+
+    // Build polishing prompt
+    std::string prompt = R&quot;(### CONTEXT
+polish the following content:
+Content: )&quot; + _content + R&quot;(
+## YOUR ANSWER:
+Provide a comprehensive answer using the content.)&quot;;
+
+    // Replace content of the last message
+    inJson.back()[&quot;content&quot;] = prompt;
+
+    return inJson.dump();
+});
+
+</code></pre> <h3 id=8-connect-nodes>8. Connect Nodes</h3> <p>Use the <code>chain</code> function to establish chain connections between nodes:</p> <pre><code class=language-c++>#include &lt;nodeflow.hpp&gt;
+
+// CE Node to Generate Node
+chain(ce_node, generate_node, &quot;generate&quot;);
+
+// Generate Node to Polish Node
+chain(generate_node, polish_node, &quot;polish&quot;);
+</code></pre> <h3 id=9-create-workflow-and-execute>9. Create Workflow and Execute</h3> <p>Create workflow, set start node and execute:</p> <pre><code class=language-c++>// Create workflow
+auto f = std::make_shared&lt;nodeflow::Flow&gt;();
+
+// Set start node to CE Node
+f-&gt;start(ce_node);
+
+// Execute workflow
+auto result = f-&gt;runWithInput&lt;std::string, std::string&gt;(message);
+</code></pre> <p><strong>Execution Flow:</strong> 1. Input message enters <code>ce_node</code> for context compression processing 2. Compressed context is passed to <code>generate_node</code> 3. <code>generate_node</code> generates answer based on context, invoking tools (e.g., search) when necessary 4. Generated result is passed to <code>polish_node</code> for polishing 5. Return final polished answer</p> <h2 id=complete-example>Complete Example</h2> <p>The following is a complete context compression agent implementation example:</p> <pre><code class=language-c++>#include &quot;hybrid_agents.h&quot;
+#include &lt;chat_node.h&gt;
+#include &lt;ce_node.h&gt;
+#include &lt;hybrid_llm.h&gt;
+#include &lt;log_util.hpp&gt;
+#include &lt;nodeflow.hpp&gt;
+#include &lt;tools.h&gt;
+#include &lt;web_search.h&gt;
+#include &lt;nlohmann/json.hpp&gt;
+
+namespace
+{
+    // Lazy initialization function
+    void ensure_initialized()
+    {
+        static bool initialized = []() -&gt; bool
+        {
+            try
+            {
+                HYB_LOG_DEBUG(&quot;===== hybrid_agent lazy initialization start =====&quot;);
+
+                // Register default local tools
+                HYB_LOG_DEBUG(&quot;🔧 Register default tools&quot;);
+                common_tools::tools::add_function_call(search_news_tool,
+                    R&quot;({&quot;type&quot;:&quot;function&quot;,&quot;function&quot;:{&quot;name&quot;:&quot;search_news&quot;,&quot;description&quot;:&quot;Search the web using keywords to get the latest, time-sensitive information such as weather and news, supporting filtering by time range, country, etc. to get web content, titles, and link information&quot;,&quot;parameters&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;query&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Search query string used to search for relevant information on the web. Keyword combinations should be concise and clear, avoiding redundant information while ensuring they accurately reflect the core needs of the user's question. Keyword combinations should conform to search engine syntax and logical rules&quot;,&quot;minLength&quot;:1},&quot;time_range&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Time range used to limit search results from a specific time&quot;,&quot;enum&quot;:[&quot;day&quot;,&quot;week&quot;]},&quot;country&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Region name (must be in English) used to limit search results from a specific region&quot;,&quot;enum&quot;:[&quot;china&quot;,&quot;usa&quot;,&quot;japan&quot;,&quot;...&quot;]}},&quot;required&quot;:[&quot;query&quot;]}}})&quot;
+                );
+                common_tools::tools::add_function_call(search_web_tool,
+                    R&quot;({&quot;type&quot;:&quot;function&quot;,&quot;function&quot;:{&quot;name&quot;:&quot;search_web2&quot;,&quot;description&quot;:&quot;Search the web using keywords to get general information that doesn't change over time, supporting filtering by country, etc. to get web content, titles, and link information&quot;,&quot;parameters&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;query&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Search query string used to search for relevant information on the web. Keyword combinations should be concise and clear, avoiding redundant information while ensuring they accurately reflect the core needs of the user's question. Keyword combinations should conform to search engine syntax and logical rules&quot;,&quot;minLength&quot;:1},&quot;country&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;Country name (must be in English) used to limit search results from a specific country&quot;,&quot;enum&quot;:[&quot;china&quot;,&quot;usa&quot;,&quot;japan&quot;,&quot;...&quot;]}},&quot;required&quot;:[&quot;query&quot;]}}})&quot;
+                );
+
+                HYB_LOG_DEBUG(&quot;✅ hybrid_agent lazy initialization complete&quot;);
+                return true;
+            }
+            catch (const std::exception&amp; ex)
+            {
+                HYB_LOG_ERROR(std::string(&quot;hybrid_agent ensure_initialized exception: &quot;) + ex.what());
+                return false;
+            }
+        }();
+        (void)initialized;
+    }
+
+    // Bridge function between C and C++
+    std::string call_tool_impl_cpp(const std::string&amp; message)
+    {
+        try
+        {
+            HYB_LOG_INFO(&quot;===== call_tool_impl_cpp BEGIN =====&quot;);
+
+            auto f = std::make_shared&lt;nodeflow::Flow&gt;();
+
+            // Configure CE Node
+            ce_node::ce_node_settings s_ce;
+            s_ce.strategy = ContextStrategy::SUMMARIZING;
+            s_ce.context_limit = 3; // Compression trigger threshold, number of history turns
+            s_ce.keep_last_n_turns = 1; // Number of recent original message turns to keep
+            s_ce.tool_trim_limit = 600; // Number of characters to keep for tool results in history messages
+            s_ce.summarizer_model = &quot;gpt-4o-mini&quot;;
+            s_ce.summarizer_max_tokens = 400;
+
+            const auto ce_node = std::make_shared&lt;ce_node::CeNode&lt;std::string, std::string&gt;&gt;(s_ce);
+
+            ce_node-&gt;setPostprocessor([](const std::string&amp; output) -&gt; std::string {
+                HYB_LOG_INFO(&quot;🤢 ce_node output: {}&quot;, output);
+                return output;
+            });
+
+            route(ce_node, [&amp;](const std::string&amp;, const std::string&amp; output) -&gt; std::optional&lt;std::string&gt; {
+                return &quot;generate&quot;;
+            });
+
+            // Configure Generate Node
+            chat_node::chat_node_settings s_generate;
+            s_generate.model = &quot;gpt-4o-mini&quot;;
+            s_generate.temperature = 0.7;
+            s_generate.top_p = 0.95;
+            s_generate.max_tokens = 4096;
+            s_generate.tool_choice = &quot;auto&quot;;
+            s_generate.tools_json = common_tools::tools::get_all_tools_json();
+
+            const auto generate_node = std::make_shared&lt;chat_node::ChatNode&lt;std::string, std::string&gt;&gt;(s_generate);
+
+            generate_node-&gt;setPreprocessor([](const std::string&amp; in) -&gt; std::string {
+                return in;
+            });
+
+            generate_node-&gt;setPostprocessor([](const std::string&amp; output) -&gt; std::string {
+                return output;
+            });
+
+            route(generate_node, [&amp;](const std::string&amp;, const std::string&amp; output) -&gt; std::optional&lt;std::string&gt; {
+                return &quot;polish&quot;;
+            });
+
+            // Configure Polish Node
+            chat_node::chat_node_settings s_polish;
+            s_polish.model = &quot;gpt-4o-mini&quot;;
+            s_polish.temperature = 0.7;
+            s_polish.top_p = 0.95;
+            s_polish.max_tokens = 4096;
+            s_polish.tool_choice = &quot;none&quot;;
+
+            const auto polish_node = std::make_shared&lt;chat_node::ChatNode&lt;std::string, std::string&gt;&gt;(s_polish);
+
+            polish_node-&gt;setPreprocessor([](const std::string&amp; in) -&gt; std::string {
+                nlohmann::json inJson = nlohmann::json::parse(in);
+                std::string _content = inJson.back()[&quot;content&quot;].get&lt;std::string&gt;();
+                std::string prompt = R&quot;(### CONTEXT
+polish the following content:
+Content: )&quot; + _content + R&quot;(
+## YOUR ANSWER:
+Provide a comprehensive answer using the content.)&quot;;
+
+                inJson.back()[&quot;content&quot;] = prompt;
+                return inJson.dump();
+            });
+
+            polish_node-&gt;setPostprocessor([](const std::string&amp; output) -&gt; std::string {
+                return output;
+            });
+
+            // Connect nodes
+            chain(ce_node, generate_node, &quot;generate&quot;);
+            chain(generate_node, polish_node, &quot;polish&quot;);
+
+            // Create workflow and execute
+            f-&gt;start(ce_node);
+            auto result = f-&gt;runWithInput&lt;std::string, std::string&gt;(message);
+
+            return result;
+        }
+        catch (const std::exception&amp; ex)
+        {
+            HYB_LOG_ERROR(std::string(&quot;call_tool_impl_cpp exception: &quot;) + ex.what());
+            return {R&quot;({&quot;ok&quot;:false,&quot;error&quot;:&quot;exception&quot;})&quot;};
+        }
+        catch (...)
+        {
+            HYB_LOG_ERROR(&quot;call_tool_impl_cpp unknown exception&quot;);
+            return {R&quot;({&quot;ok&quot;:false,&quot;error&quot;:&quot;unknown exception&quot;})&quot;};
+        }
+    }
+}
+
+HYBRID_AGENT_API const char* hybrid_agents(const char* input)
+{
+    try
+    {
+        ensure_initialized();
+
+        thread_local std::string tls_result;
+        const std::string message = input ? std::string(input) : std::string();
+
+        tls_result = call_tool_impl_cpp(message);
+        return tls_result.c_str();
+    }
+    catch (...)
+    {
+        static constexpr char k_empty[] = &quot;{}&quot;;
+        return k_empty;
+    }
+}
+</code></pre> <h2 id=key-points>Key Points</h2> <ol> <li><strong>Context Compression</strong>: CE Node automatically manages long conversation history, using summarization strategy to compress old messages, avoiding model context window limits</li> <li><strong>Tool Invocation</strong>: Generate Node configured with <code>tool_choice = "auto"</code>, allowing the model to automatically invoke registered tools as needed</li> <li><strong>Linear Workflow</strong>: Use <code>chain</code> function to establish simple chain connections, workflow is clear and easy to understand</li> <li><strong>Answer Polishing</strong>: Polish Node polishes generated results to improve answer quality</li> <li><strong>Routing Configuration</strong>: Although the workflow is linear, you still need to use <code>route</code> function to configure routing, ensuring data is correctly passed</li> </ol> <h2 id=use-cases>Use Cases</h2> <p>This example is suitable for the following scenarios: - Intelligent assistants that need to support long conversation history - Applications that need automatic tool invocation (e.g., search) - Scenarios requiring high-quality answer output - Simple, maintainable workflow structures</p> <h2 id=differences-from-conditional-routing-agent>Differences from Conditional Routing Agent</h2> <table> <thead> <tr> <th>Feature</th> <th>Context Compression Agent</th> <th>Conditional Routing Agent</th> </tr> </thead> <tbody> <tr> <td>Workflow Structure</td> <td>Linear chain</td> <td>Conditional routing with loops</td> </tr> <tr> <td>Context Management</td> <td>CE Node automatic compression</td> <td>Manual context management</td> </tr> <tr> <td>Tool Invocation</td> <td>Generate Node automatic invocation</td> <td>Custom node manual invocation</td> </tr> <tr> <td>Complexity</td> <td>Simple</td> <td>Medium</td> </tr> <tr> <td>Use Cases</td> <td>Long conversations, automatic tool invocation</td> <td>Scenarios requiring decision-making and loops</td> </tr> </tbody> </table> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2025 LATC CTOO Lenovo Group </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.annotate", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../assets/javascripts/bundle.e71a0d61.min.js></script> </body> </html>
