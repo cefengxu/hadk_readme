@@ -1,44 +1,44 @@
-# 使用工具节点的条件路由智能体开发示例
+# Conditional Routing Agent with Tool Node Development Example
 
-## 概述
+## Overview
 
-本示例展示如何使用 `ToolNode` 实现条件路由智能体。与使用 `OneFuncNode` 手动调用工具的方式不同，`ToolNode` 提供了更简洁、更标准化的工具调用方式，特别适合需要调用已注册工具的场景。
+This example demonstrates how to use `ToolNode` to implement a conditional routing agent. Unlike using `OneFuncNode` to manually invoke tools, `ToolNode` provides a more concise and standardized way to invoke tools, especially suitable for scenarios that need to invoke registered tools.
 
-**工作流示意图：**
+**Workflow Diagram:**
 ```
-输入 → decide_node（决策） → [条件路由]
-                              ├─ "search" → web_search_node（ToolNode 工具节点） → decide_node（循环）
-                              └─ "answer" → answer_node（生成答案） → 输出
+Input → decide_node (Decision) → [Conditional Routing]
+                                  ├─ "search" → web_search_node (ToolNode) → decide_node (Loop)
+                                  └─ "answer" → answer_node (Generate Answer) → Output
 ```
 
-**核心特性：**
-- **工具节点**：使用 `ToolNode` 封装工具调用逻辑，代码更简洁
-- **条件路由**：根据决策节点的输出动态选择下一个节点
-- **循环工作流**：支持在决策节点和搜索节点之间循环，直到获得足够信息
-- **上下文累积**：每次搜索的结果会累积到上下文中，供后续决策使用
+**Core Features:**
+- **Tool Node**: Uses `ToolNode` to encapsulate tool invocation logic, making code more concise
+- **Conditional Routing**: Dynamically select the next node based on the decision node's output
+- **Loop Workflow**: Supports looping between decision node and search node until sufficient information is obtained
+- **Context Accumulation**: Each search result accumulates into the context for subsequent decisions
 
-**与使用 OneFuncNode 的区别：**
-- `OneFuncNode`：需要手动调用 `common_tools::tools::call_tool`，适合需要复杂自定义逻辑的场景
-- `ToolNode`：自动处理工具调用，通过预处理函数指定工具名称和参数，代码更简洁，适合直接调用已注册工具的场景
+**Differences from Using OneFuncNode:**
+- `OneFuncNode`: Requires manually calling `common_tools::tools::call_tool`, suitable for scenarios requiring complex custom logic
+- `ToolNode`: Automatically handles tool invocation, specifies tool name and parameters through preprocessor function, code is more concise, suitable for directly invoking registered tools
 
-## 开发步骤
+## Development Steps
 
-### 1. 注册工具
+### 1. Register Tools
 
-与单节点智能体相同，需要先注册所需的工具。本示例使用 `search_web2` 工具进行网络搜索：
+Same as a single node agent, you need to register the required tools first. This example uses the `search_web2` tool for web search:
 
 ```c++
 #include <tools.h>
 #include <web_search.h>
 
 common_tools::tools::add_function_call(search_web_tool,
-    R"({"type":"function","function":{"name":"search_web2","description":"使用关键词搜索网页，用于获取通用的，不会随着时间变化而改变的信息，支持按国家等过滤条件获取网页内容、标题和链接信息","parameters":{"type":"object","properties":{"query":{"type":"string","description":"搜索查询字符串，用于在网络上搜索相关信息。关键词组合应简洁明了，避免冗余信息，同时确保能够准确反映用户问题的核心需求。关键词组合应符合搜索引擎的语法和逻辑规则","minLength":1},"country":{"type":"string","description":"国家名称(必须是英文)，用于限定搜索结果来自的国家","enum":["china","usa","japan","..."]}},"required":["query"]}}})"
+    R"({"type":"function","function":{"name":"search_web2","description":"Search the web using keywords to get general information that doesn't change over time, supporting filtering by country, etc. to get web content, titles, and link information","parameters":{"type":"object","properties":{"query":{"type":"string","description":"Search query string used to search for relevant information on the web. Keyword combinations should be concise and clear, avoiding redundant information while ensuring they accurately reflect the core needs of the user's question. Keyword combinations should conform to search engine syntax and logical rules","minLength":1},"country":{"type":"string","description":"Country name (must be in English) used to limit search results from a specific country","enum":["china","usa","japan","..."]}},"required":["query"]}}})"
 );
 ```
 
-### 2. 配置决策节点（Decide Node）
+### 2. Configure Decision Node (Decide Node)
 
-决策节点负责分析当前上下文，决定下一步行动（搜索或回答）：
+The decision node is responsible for analyzing the current context and deciding the next action (search or answer):
 
 ```c++
 chat_node::chat_node_settings s1;
@@ -50,11 +50,11 @@ s1.tool_choice = "none";
 const auto decide_node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(s1);
 ```
 
-### 3. 配置决策节点的预处理和后处理
+### 3. Configure Decision Node Preprocessing and Postprocessing
 
-#### 3.1 设置预处理函数
+#### 3.1 Set Preprocessor Function
 
-预处理函数构建决策提示词，包含问题、已有上下文和可执行的操作：
+The preprocessor function builds a decision prompt containing the question, existing context, and available actions:
 
 ```c++
 decide_node->setPreprocessor([&](const std::string& in) -> std::string {
@@ -68,7 +68,7 @@ decide_node->setPreprocessor([&](const std::string& in) -> std::string {
 });
 ```
 
-`build_ws_prompt` 函数示例：
+`build_ws_prompt` function example:
 
 ```c++
 static std::string build_ws_prompt(const std::string &question, const std::string &context) {
@@ -109,34 +109,34 @@ Current time: )" + local_time;
 }
 ```
 
-#### 3.2 设置后处理函数
+#### 3.2 Set Postprocessor Function
 
-后处理函数解析 YAML 格式的决策结果，提取行动类型和参数：
+The postprocessor function parses the YAML-formatted decision result and extracts the action type and parameters:
 
 ```c++
 decide_node->setPostprocessor([&](const std::string& output) -> std::string {
     nlohmann::json output_Json = nlohmann::json::parse(output);
     
-    // 提取并清理响应内容（移除代码块标记）
+    // Extract and clean response content (remove code block markers)
     std::string cleaned_response = StripFenceRegex(
         output_Json.back()["content"].get<std::string>());
     
-    // 解析 YAML
+    // Parse YAML
     g_yaml_node = YAML::Load(cleaned_response);
     
-    // 检查必要字段
+    // Check required fields
     if (!g_yaml_node["thinking"] || !g_yaml_node["action"] || !g_yaml_node["reason"]) {
         HYB_LOG_WARN("Missing required YAML fields");
-        return "search";  // 错误时默认返回搜索
+        return "search";  // Default to search on error
     }
     
-    // 根据行动类型返回不同的值
+    // Return different values based on action type
     if (g_yaml_node["action"].as<std::string>() == "search") {
-        return g_yaml_node["search_query"].as<std::string>();  // 返回搜索查询
+        return g_yaml_node["search_query"].as<std::string>();  // Return search query
     }
     
     if (g_yaml_node["action"].as<std::string>() == "answer") {
-        // 构建最终答案提示词
+        // Build final answer prompt
         std::string prompt = R"(### CONTEXT
 Based on the following information, answer the question.
 Question: )" + g_question + R"(
@@ -147,39 +147,39 @@ Provide a comprehensive answer using the research results.)";
         return prompt;
     }
     
-    return "search";  // 默认返回搜索
+    return "search";  // Default to search
 });
 ```
 
-### 4. 配置条件路由
+### 4. Configure Conditional Routing
 
-使用 `route` 函数为决策节点配置条件路由，根据后处理函数的输出选择下一个节点：
+Use the `route` function to configure conditional routing for the decision node, selecting the next node based on the postprocessor function's output:
 
 ```c++
 route(decide_node, [&](const std::string &input, const std::string &output) -> std::optional<std::string> {
     if (g_yaml_node["action"].as<std::string>() == "search") {
-        return "search";  // 路由到搜索节点
+        return "search";  // Route to search node
     }
     
     if (g_yaml_node["action"].as<std::string>() == "answer") {
-        return "answer";  // 路由到回答节点
+        return "answer";  // Route to answer node
     }
     
-    return std::nullopt;  // 无匹配路由
+    return std::nullopt;  // No matching route
 });
 ```
 
-**参数说明：**
-- 第一个参数：源节点（`decide_node`）
-- 第二个参数：路由函数，接收输入和输出，返回路由名称（`std::optional<std::string>`）
+**Parameter Description:**
+- First parameter: Source node (`decide_node`)
+- Second parameter: Route function that receives input and output, returns route name (`std::optional<std::string>`)
 
-### 5. 配置工具节点（ToolNode）
+### 5. Configure Tool Node (ToolNode)
 
-**关键区别：使用 `ToolNode` 而不是 `OneFuncNode`**
+**Key Difference: Use `ToolNode` instead of `OneFuncNode`**
 
-`ToolNode` 是专门用于调用已注册工具的节点类型，它通过预处理函数接收工具名称和参数，自动处理工具调用。
+`ToolNode` is a node type specifically designed for invoking registered tools. It receives tool name and parameters through a preprocessor function and automatically handles tool invocation.
 
-#### 5.1 创建 ToolNode 实例
+#### 5.1 Create ToolNode Instance
 
 ```c++
 #include <tool_node.h>
@@ -187,40 +187,40 @@ route(decide_node, [&](const std::string &input, const std::string &output) -> s
 const auto web_search_node = std::make_shared<tool_node::ToolNode<std::string, std::string>>();
 ```
 
-#### 5.2 设置预处理函数
+#### 5.2 Set Preprocessor Function
 
-预处理函数需要将输入转换为 `ToolNode` 期望的格式：包含工具名称和参数的 JSON 对象。
+The preprocessor function needs to convert the input to the format expected by `ToolNode`: a JSON object containing the tool name and parameters.
 
 ```c++
-// 需要保存查询字符串供后处理函数使用
+// Need to save query string for postprocessor function to use
 std::string g_query = "";
 
 web_search_node->setPreprocessor([&](const std::string& in) -> std::string {
-    // 保存搜索查询，供后处理函数使用
+    // Save search query for postprocessor function to use
     g_query = in;
     
-    // 构建工具参数 JSON
+    // Build tool parameters JSON
     nlohmann::json tool_args_json;
-    tool_args_json["query"] = in;  // in 是搜索查询字符串
+    tool_args_json["query"] = in;  // in is the search query string
     
-    // 构建 ToolNode 需要的输入格式：包含工具名称和参数
+    // Build input format required by ToolNode: contains tool name and parameters
     nlohmann::json tool_input_json;
-    tool_input_json["name"] = "search_web2";  // 指定使用 search_web2 工具
-    tool_input_json["arguments"] = tool_args_json.dump();  // 参数需要是 JSON 字符串
+    tool_input_json["name"] = "search_web2";  // Specify using search_web2 tool
+    tool_input_json["arguments"] = tool_args_json.dump();  // Parameters need to be JSON string
     
     return tool_input_json.dump();
 });
 ```
 
-**ToolNode 输入格式说明：**
-- `name`：工具名称（字符串），必须是已注册的工具名称
-- `arguments`：工具参数（JSON 字符串），需要是有效的 JSON 格式
+**ToolNode Input Format Description:**
+- `name`: Tool name (string), must be a registered tool name
+- `arguments`: Tool parameters (JSON string), must be valid JSON format
 
-**注意**：由于后处理函数无法直接访问预处理函数的输入，如果需要在后处理函数中使用输入数据，需要在预处理函数中将其保存到外部变量（如 `g_query`）。
+**Note**: Since the postprocessor function cannot directly access the preprocessor function's input, if you need to use input data in the postprocessor function, you need to save it to an external variable (such as `g_query`) in the preprocessor function.
 
-#### 5.3 设置后处理函数
+#### 5.3 Set Postprocessor Function
 
-后处理函数处理工具返回的结果，解析并格式化搜索结果：
+The postprocessor function processes the tool's return result, parsing and formatting search results:
 
 ```c++
 web_search_node->setPostprocessor([&](const std::string& output) -> std::string {
@@ -228,7 +228,7 @@ web_search_node->setPostprocessor([&](const std::string& output) -> std::string 
     std::string web_content;
     
     try {
-        // 从包装的 JSON 中提取实际搜索结果
+        // Extract actual search results from wrapped JSON
         if (ws_out_json.contains("content") && 
             ws_out_json["content"].is_array() && 
             !ws_out_json["content"].empty()) {
@@ -236,11 +236,11 @@ web_search_node->setPostprocessor([&](const std::string& output) -> std::string 
             if (first.contains("type") && 
                 first["type"].get<std::string>() == "text" && 
                 first.contains("text")) {
-                // 二次解析实际搜索结果
+                // Parse actual search results again
                 nlohmann::json ws_payload = nlohmann::json::parse(
                     first["text"].get<std::string>());
                 
-                // 提取搜索结果并格式化
+                // Extract and format search results
                 if (ws_payload.contains("responses") && 
                     ws_payload["responses"].is_array()) {
                     for (const auto &resp : ws_payload["responses"]) {
@@ -254,10 +254,10 @@ web_search_node->setPostprocessor([&](const std::string& output) -> std::string 
             }
         }
     } catch (const std::exception &e) {
-        HYB_LOG_ERROR("解析搜索结果失败: {}", e.what());
+        HYB_LOG_ERROR("Failed to parse search results: {}", e.what());
     }
     
-    // 累积上下文（使用预处理函数中保存的查询字符串）
+    // Accumulate context (using query string saved in preprocessor function)
     std::string new_context = 
         g_context +
         "\n\nSEARCH: " + (!g_query.empty() ? g_query : "No query") +
@@ -266,82 +266,82 @@ web_search_node->setPostprocessor([&](const std::string& output) -> std::string 
     
     g_context = new_context;
     
-    // 返回问题，用于重新进入决策节点
+    // Return question for re-entering decision node
     nlohmann::json output_json = nlohmann::json::array();
     output_json.push_back({{"role", "user"}, {"content", g_question}});
     return output_json.dump();
 });
 ```
 
-### 6. 配置工具节点的路由
+### 6. Configure Tool Node Routing
 
-工具节点执行后总是返回到决策节点，形成循环：
+The tool node always returns to the decision node after execution, forming a loop:
 
 ```c++
 route(web_search_node, [&](const std::string &input, const std::string &output) -> std::optional<std::string> {
-    return "decide";  // 总是路由回决策节点
+    return "decide";  // Always route back to decision node
 });
 ```
 
-### 7. 配置回答节点（Answer Node）
+### 7. Configure Answer Node (Answer Node)
 
-回答节点生成最终答案：
+The answer node generates the final answer:
 
 ```c++
 chat_node::chat_node_settings s_answer;
 const auto answer_node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(s_answer);
 
 answer_node->setPreprocessor([&](const std::string &in) -> std::string {
-    // 将输入转换为 Chat Completion 格式
+    // Convert input to Chat Completion format
     nlohmann::json inJson = nlohmann::json::array();
     inJson.push_back({{"role", "user"}, {"content", in}});
     return inJson.dump();
 });
 ```
 
-### 8. 连接节点
+### 8. Connect Nodes
 
-使用 `chain` 函数建立节点之间的连接：
+Use the `chain` function to establish connections between nodes:
 
 ```c++
-// 决策节点到工具节点
+// Decision node to tool node
 nodeflow::chain(decide_node, web_search_node, "search");
 
-// 决策节点到回答节点
+// Decision node to answer node
 nodeflow::chain(decide_node, answer_node, "answer");
 
-// 工具节点回到决策节点（形成循环）
+// Tool node back to decision node (forms loop)
 nodeflow::chain(web_search_node, decide_node, "decide");
 ```
 
-### 9. 创建工作流并执行
+### 9. Create Workflow and Execute
 
 ```c++
-// 创建工作流
+// Create workflow
 auto f = std::make_shared<nodeflow::Flow>();
 
-// 设置起始节点
+// Set start node
 f->start(decide_node);
 
-// 执行工作流
+// Execute workflow
 auto result = f->runWithInput<std::string, std::string>(question);
 ```
 
-**执行流程：**
-1. 输入问题进入 `decide_node`
-2. `decide_node` 分析上下文，决定搜索或回答
-3. 如果选择搜索：
-   - 路由到 `web_search_node`（ToolNode）
-   - ToolNode 自动调用 `search_web2` 工具
-   - 搜索结果累积到上下文
-   - 路由回 `decide_node`（循环）
-4. 如果选择回答：
-   - 路由到 `answer_node` 生成最终答案
-   - 返回结果
+**Execution Flow:**
+1. Input question enters `decide_node`
+2. `decide_node` analyzes context and decides to search or answer
+3. If search is chosen:
+   - Route to `web_search_node` (ToolNode)
+   - ToolNode automatically invokes `search_web2` tool
+   - Search results accumulate into context
+   - Route back to `decide_node` (loop)
+4. If answer is chosen:
+   - Route to `answer_node` to generate final answer
+   - Return result
 
-## 完整示例
+## Complete Example
 
-以下是一个完整的使用 ToolNode 的条件路由智能体实现示例：
+The following is a complete conditional routing agent implementation example using ToolNode:
 
 ```c++
 #include <chat_node.h>
@@ -400,20 +400,20 @@ search_query: <specific search query if action is search>
 Current time: )" + local_time;
 }
 
-// 注册工具
+// Register tools
 common_tools::tools::add_function_call(search_web_tool,
-    R"({"type":"function","function":{"name":"search_web2","description":"使用关键词搜索网页，用于获取通用的，不会随着时间变化而改变的信息，支持按国家等过滤条件获取网页内容、标题和链接信息","parameters":{"type":"object","properties":{"query":{"type":"string","description":"搜索查询字符串，用于在网络上搜索相关信息。关键词组合应简洁明了，避免冗余信息，同时确保能够准确反映用户问题的核心需求。关键词组合应符合搜索引擎的语法和逻辑规则","minLength":1},"country":{"type":"string","description":"国家名称(必须是英文)，用于限定搜索结果来自的国家","enum":["china","usa","japan","..."]}},"required":["query"]}}})"
+    R"({"type":"function","function":{"name":"search_web2","description":"Search the web using keywords to get general information that doesn't change over time, supporting filtering by country, etc. to get web content, titles, and link information","parameters":{"type":"object","properties":{"query":{"type":"string","description":"Search query string used to search for relevant information on the web. Keyword combinations should be concise and clear, avoiding redundant information while ensuring they accurately reflect the core needs of the user's question. Keyword combinations should conform to search engine syntax and logical rules","minLength":1},"country":{"type":"string","description":"Country name (must be in English) used to limit search results from a specific country","enum":["china","usa","japan","..."]}},"required":["query"]}}})"
 );
 
 std::string call_tool_impl_cpp(const std::string &question) {
     try {
-        // 状态变量
+        // State variables
         std::string g_context = "";
         std::string g_question = "";
         std::string g_query = "";
         YAML::Node g_yaml_node = YAML::Node();
 
-        // 配置决策节点
+        // Configure decision node
         chat_node::chat_node_settings s1;
         s1.model = "gpt-4o-mini";
         s1.temperature = 0.7;
@@ -422,7 +422,7 @@ std::string call_tool_impl_cpp(const std::string &question) {
         s1.tool_choice = "none";
         const auto decide_node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(s1);
 
-        // 设置决策节点的预处理函数
+        // Set decision node's preprocessor function
         decide_node->setPreprocessor([&](const std::string& in) -> std::string {
             nlohmann::json inJson = nlohmann::json::parse(in);
             g_question = inJson[0]["content"].get<std::string>();
@@ -465,7 +465,7 @@ Provide a comprehensive answer using the research results.)";
             return "search";
         });
 
-        // 配置决策节点的条件路由
+        // Configure decision node's conditional routing
         route(decide_node, [&](const std::string &input, const std::string &output) -> std::optional<std::string> {
             if (g_yaml_node["action"].as<std::string>() == "search") {
                 HYB_LOG_INFO("Routing to search node");
@@ -478,27 +478,27 @@ Provide a comprehensive answer using the research results.)";
             return std::nullopt;
         });
 
-        // 配置工具节点（使用 ToolNode）
+        // Configure tool node (using ToolNode)
         const auto web_search_node = std::make_shared<tool_node::ToolNode<std::string, std::string>>();
         
-        // 设置工具节点的预处理函数
+        // Set tool node's preprocessor function
         web_search_node->setPreprocessor([&](const std::string& in) -> std::string {
-            // 保存搜索查询，供后处理函数使用
+            // Save search query for postprocessor function to use
             g_query = in;
             
-            // 构建工具参数 JSON
+            // Build tool parameters JSON
             nlohmann::json tool_args_json;
-            tool_args_json["query"] = in;  // in 是搜索查询字符串
+            tool_args_json["query"] = in;  // in is the search query string
             
-            // 构建 ToolNode 需要的输入格式：包含工具名称和参数
+            // Build input format required by ToolNode: contains tool name and parameters
             nlohmann::json tool_input_json;
-            tool_input_json["name"] = "search_web2";  // 指定使用 search_web2 工具
-            tool_input_json["arguments"] = tool_args_json.dump();  // 参数需要是 JSON 字符串
+            tool_input_json["name"] = "search_web2";  // Specify using search_web2 tool
+            tool_input_json["arguments"] = tool_args_json.dump();  // Parameters need to be JSON string
             
             return tool_input_json.dump();
         });
 
-        // 设置工具节点的后处理函数
+        // Set tool node's postprocessor function
         web_search_node->setPostprocessor([&](const std::string& output) -> std::string {
             nlohmann::json ws_out_json = nlohmann::json::parse(output);
             std::string web_content;
@@ -511,7 +511,7 @@ Provide a comprehensive answer using the research results.)";
                     if (first.contains("type") && 
                         first["type"].get<std::string>() == "text" && 
                         first.contains("text")) {
-                        // 二次解析实际搜索结果
+                        // Parse actual search results again
                         nlohmann::json ws_payload = nlohmann::json::parse(
                             first["text"].get<std::string>());
                         if (ws_payload.contains("responses") && 
@@ -527,10 +527,10 @@ Provide a comprehensive answer using the research results.)";
                     }
                 }
             } catch (const std::exception &e) {
-                HYB_LOG_ERROR("解析搜索结果失败: {}", e.what());
+                HYB_LOG_ERROR("Failed to parse search results: {}", e.what());
             }
 
-            // 累积上下文
+            // Accumulate context
             std::string new_context = 
                 g_context +
                 "\n\nSEARCH: " + (!g_query.empty() ? g_query : "No query") +
@@ -539,18 +539,18 @@ Provide a comprehensive answer using the research results.)";
 
             g_context = new_context;
 
-            // 返回问题，用于重新进入决策节点
+            // Return question for re-entering decision node
             nlohmann::json output_json = nlohmann::json::array();
             output_json.push_back({{"role", "user"}, {"content", g_question}});
             return output_json.dump();
         });
 
-        // 配置工具节点的路由（总是返回决策节点）
+        // Configure tool node's routing (always returns to decision node)
         route(web_search_node, [&](const std::string &input, const std::string &output) -> std::optional<std::string> {
             return "decide";
         });
 
-        // 配置回答节点
+        // Configure answer node
         chat_node::chat_node_settings s_answer;
         const auto answer_node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(s_answer);
         answer_node->setPreprocessor([&](const std::string &in) -> std::string {
@@ -559,12 +559,12 @@ Provide a comprehensive answer using the research results.)";
             return inJson.dump();
         });
 
-        // 连接节点
+        // Connect nodes
         nodeflow::chain(decide_node, web_search_node, "search");
         nodeflow::chain(decide_node, answer_node, "answer");
         nodeflow::chain(web_search_node, decide_node, "decide");
 
-        // 创建工作流并执行
+        // Create workflow and execute
         auto f = std::make_shared<nodeflow::Flow>();
         f->start(decide_node);
         auto result = f->runWithInput<std::string, std::string>(question);
@@ -580,49 +580,49 @@ Provide a comprehensive answer using the research results.)";
 }
 
 int main() {
-    // 构建输入消息
+    // Build input message
     nlohmann::json inputJson = nlohmann::json::array();
     inputJson.push_back({
         {"role", "user"},
         {"content", "What is the latest news about artificial intelligence?"}
     });
     
-    // 调用智能体并获取响应
+    // Call agent and get response
     std::string response = call_tool_impl_cpp(inputJson.dump());
     
-    // 输出结果
+    // Output result
     std::cout << response << std::endl;
 
     return 0;
 }
 ```
 
-## ToolNode vs OneFuncNode 对比
+## ToolNode vs OneFuncNode Comparison
 
-### 使用 ToolNode 的优势
+### Advantages of Using ToolNode
 
-1. **代码更简洁**：不需要手动调用 `common_tools::tools::call_tool`，ToolNode 自动处理
-2. **标准化接口**：统一的工具调用格式，便于维护和调试
-3. **错误处理**：ToolNode 内置了工具调用的错误处理和日志记录
-4. **类型安全**：通过模板参数明确输入输出类型
+1. **More Concise Code**: No need to manually call `common_tools::tools::call_tool`, ToolNode handles it automatically
+2. **Standardized Interface**: Unified tool invocation format, easier to maintain and debug
+3. **Error Handling**: ToolNode has built-in error handling and logging for tool invocation
+4. **Type Safety**: Clear input and output types through template parameters
 
-### 使用 OneFuncNode 的场景
+### Scenarios for Using OneFuncNode
 
-1. **复杂自定义逻辑**：需要在工具调用前后执行复杂的数据处理
-2. **多工具组合**：需要在一个节点中调用多个工具或执行其他操作
-3. **特殊错误处理**：需要自定义的错误处理逻辑
+1. **Complex Custom Logic**: Need to perform complex data processing before and after tool invocation
+2. **Multiple Tool Combinations**: Need to invoke multiple tools or perform other operations in one node
+3. **Special Error Handling**: Need custom error handling logic
 
-### 选择建议
+### Selection Recommendations
 
-- **优先使用 ToolNode**：当只需要调用单个已注册工具时
-- **使用 OneFuncNode**：当需要复杂的自定义逻辑或多工具组合时
+- **Prefer ToolNode**: When you only need to invoke a single registered tool
+- **Use OneFuncNode**: When you need complex custom logic or multiple tool combinations
 
-## 关键要点
+## Key Points
 
-1. **ToolNode 输入格式**：必须包含 `name`（工具名称）和 `arguments`（JSON 字符串格式的参数）
-2. **预处理函数**：将输入转换为 ToolNode 期望的格式
-3. **后处理函数**：处理工具返回的结果，通常需要解析 JSON 并格式化
-4. **条件路由**：使用 `route` 函数根据节点输出动态选择下一个节点
-5. **循环工作流**：通过路由可以实现节点之间的循环，支持迭代搜索
-6. **上下文管理**：使用全局变量或状态对象管理工作流中的上下文信息
+1. **ToolNode Input Format**: Must contain `name` (tool name) and `arguments` (parameters in JSON string format)
+2. **Preprocessor Function**: Convert input to the format expected by ToolNode
+3. **Postprocessor Function**: Process tool return results, usually need to parse JSON and format
+4. **Conditional Routing**: Use the `route` function to dynamically select the next node based on node output
+5. **Loop Workflow**: Routing can implement loops between nodes, supporting iterative search
+6. **Context Management**: Use global variables or state objects to manage context information in workflows
 

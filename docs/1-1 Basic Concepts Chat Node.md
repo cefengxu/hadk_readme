@@ -1,10 +1,10 @@
 # Chat Node
 
-Chat Node 是一个集成了大语言模型（LLM）和函数调用（Function Call）功能的节点组件，支持在线和离线模型调用。其接口严格遵循 OpenAI Chat Completion API 规范。
+Chat Node is a node component that integrates large language models (LLM) and function calling capabilities, supporting both online and offline model invocation. Its interface strictly follows the OpenAI Chat Completion API specification.
 
-## 构建 Chat Node 节点
+## Building a Chat Node
 
-通过以下方式构建聊天节点，可对模型调用进行参数配置：
+Build a chat node in the following way, allowing parameter configuration for model invocation:
 
 ```c++
 chat_node::chat_node_settings s_generate;
@@ -16,13 +16,13 @@ s_generate.tool_choice = "none";
 const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(s_generate);
 ```
 
-## Chat Node 节点的输入输出
+## Chat Node Input and Output
 
-节点的输入输出默认数据类型均为 `std::string`（自定义数据类型请参考`高级用法`）。
+The default data type for both input and output is `std::string` (for custom data types, please refer to `Advanced Usage`).
 
-### 输入格式
+### Input Format
 
-输入数据结构严格遵循 OpenAI Chat Completion API 规范，格式如下：
+The input data structure strictly follows the OpenAI Chat Completion API specification, with the following format:
 
 ```json
 [
@@ -31,7 +31,7 @@ const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std
 ]
 ```
 
-同时，也支持输入多模态的信息（如果模型支持的话）：
+It also supports multimodal input (if the model supports it):
 
 ```json
 [
@@ -57,7 +57,9 @@ const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std
     }
 ]
 ```
-亦可，基于base64格式表示图片内容：
+
+Alternatively, images can be represented in base64 format:
+
 ```json
 [
     {
@@ -83,9 +85,9 @@ const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std
 ]
 ```
 
-### 输出格式
+### Output Format
 
-输出数据结构严格遵循 OpenAI Chat Completion API 规范，格式如下：
+The output data structure strictly follows the OpenAI Chat Completion API specification, with the following format:
 
 ```json
 [
@@ -94,3 +96,4 @@ const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std
   {"role":"assistant","content":"my name is bob."}
 ]
 ```
+

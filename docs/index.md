@@ -1,60 +1,63 @@
-# HADK 开发文档
+# HADK Development Documentation
 
-欢迎来到 HADK 框架开发文档！
+Welcome to the HADK framework development documentation!
 
-## 他是什么
+## What It Is
 
-**HADK (Hybrid Agent Development Kit)** 是一个基于 C++ 实现的跨平台智能体开发套件，基于《数据结构》中描述的计算图概念，为开发者提供一套完整的、模块化的智能体构建框架。通过提供丰富的功能节点和灵活的节点编排机制，开发者可以快速构建具备复杂推理能力、工具调用能力和多模态交互能力的多平台适配智能体应用。
+**HADK (Hybrid Agent Development Kit)** is a C++-based, cross-platform framework for building intelligent agents. Built on computational graph principles, it offers a modular architecture with rich functional nodes and flexible orchestration. Developers can quickly create agents with advanced reasoning, tool integration, and multimodal capabilities that run seamlessly across Windows, Linux, and Android.
 
-## 他的优势
+## Its Advantages
 
-- **跨平台**：同一份代码支持 Windows、Linux、Android，统一 API
-- **节点化架构**：基于计算图的流程编排，支持条件路由、嵌套流、自循环
-- **类型安全**：C++ 模板实现编译期类型检查，减少运行时错误
-- **高性能**：原生编译，零拷贝优化，支持并发处理
-- **工具生态**：支持本地工具、远程工具服务器（MCP/SSE）和自定义工具
-- **模块化**：组件职责清晰，易于扩展和复用
+- **Cross-platform**: Write once, run on Windows, Linux, and Android with a unified API
+- **Node-based Architecture**: Computational graph-based orchestration with conditional routing, nested flows, and loops
+- **Type Safety**: Compile-time type checking via C++ templates to catch errors early
+- **High Performance**: Native compilation with zero-copy optimization and concurrent processing
+- **Tool Ecosystem**: Integrate local tools, remote servers (MCP/SSE), or build your own
+- **Modular**: Clean separation of concerns for easy extension and reuse
 
-## 开发环境
+## Development Environment
 
-- **C++ 编译器**：支持 C++17 或更高版本
-- **CMake**：3.24 或更高版本
-- **操作系统**：Windows 10+、Linux (Ubuntu 20.04+)、Android (API 21+)
+- **C++ Compiler**: Supports C++17 or higher
+- **CMake**: Version 3.24 or higher
+- **Operating System**: Windows 10+, Linux (Ubuntu 20.04+), Android (API 21+)
 
-## 快速开始
+## Quick Start
 
-### 基本概念
+### Basic Concepts
 
-- [Chat Node](1%20基本概念%20Chat%20Node.md) - 集成大语言模型的聊天节点
-- [Tool Node](2%20基本概念%20Tool%20Node.md) - 工具管理节点
-- [DIY Node](3%20基本概念%20DIY%20Node.md) - 自定义节点
-- [路由 Route](4%20基本概念%20路由%20Route.md) - 路由节点
-- [链和流 Chain Flow](5%20基本概念%20链和流%20Chain%20Flow.md) - 工作流管理
+- [Chat Node](1-1%20Basic%20Concepts%20Chat%20Node.md) - Chat node integrated with large language models
+- [Tool Node](1-2%20Basic%20Concepts%20Tool%20Node.md) - Tool management node
+- [Custom Node](1-3%20Basic%20Concepts%20DIY%20Node.md) - User-defined node for custom logic
+- [CE Node](1-4%20Basic%20Concepts%20CE%20Node.md) - Context engine node for managing conversation history
+- [Chain and Flow](1-5%20Basic%20Concepts%20Chain%20Flow.md) - Workflow management
+- [Route](6%20Basic%20Concepts%20Route.md) - Routing node
 
-### 应用开发
+### Application Development
 
-- [单节点智能体](6%20应用开发%20单节点智能体.md) - 单节点智能体开发示例
-- [双节点智能体](7%20应用开发%20双节点智能体.md) - 双节点智能体开发示例
-- [三节点智能体](8%20应用开发%20三节点智能体.md) - 三节点智能体开发示例
-- [指定工具的智能体](9%20应用开发%20使用工具节点的条件路由智能体.md) - 使用工具节点的条件路由智能体开发示例
-- [Inja 模板格式化](10%20应用开发%20Inja%20模板格式化.md) - Inja 模板引擎使用教程
+- [Single Node Agent](2-1%20Application%20Development%20Single%20Node%20Agent.md) - Single node agent development example
+- [Double Node Agent](2-2%20Application%20Development%20Two%20Node%20Agent.md) - Two node agent development example
+- [Triple Node Agent](2-3%20Application%20Development%20Three%20Node%20Agent.md) - Three node agent development example
+- [Agent with Specified Tools](2-4%20Application%20Development%20Conditional%20Routing%20Agent%20with%20Tool%20Node.md) - Conditional routing agent with tool node development example
+- [Inja Template Formatting](2-5%20Application%20Development%20Inja%20Template%20Formatting.md) - Inja template engine tutorial
+- [Agent via CE Node](2-6%20Application%20Development%20Agent%20via%20CE%20Node.md) - Context compression agent development example
 
-## 开始使用
+## Getting Started
 
-请从左侧导航栏选择您感兴趣的章节开始阅读。
+Please select the chapter you're interested in from the left navigation bar to start reading.
 
-## 致谢
+## Acknowledgments
 
-感谢以下开源项目的支持：
+Thanks to the following open-source projects for their support:
 
-- [cpr](https://github.com/libcpr/cpr) - HTTP 客户端
-- [nlohmann/json](https://github.com/nlohmann/json) - JSON 库
-- [spdlog](https://github.com/gabime/spdlog) - 日志库
-- [yaml-cpp](https://github.com/jbeder/yaml-cpp) - YAML 解析库
-- [inja](https://github.com/pantor/inja) - 模板引擎
+- [cpr](https://github.com/libcpr/cpr) - HTTP client
+- [nlohmann/json](https://github.com/nlohmann/json) - JSON library
+- [spdlog](https://github.com/gabime/spdlog) - Logging library
+- [yaml-cpp](https://github.com/jbeder/yaml-cpp) - YAML parsing library
+- [inja](https://github.com/pantor/inja) - Template engine
 
-## 联系方式
+## Contact
   - liusong9@lenovo.com
   - zengjl1@lenovo.com
   - moutz1@lenovo.com
   - xufeng8@lenovo.com
+
