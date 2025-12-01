@@ -1,0 +1,502 @@
+<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="HADK 框架开发文档 - 跨端轻量级智能体开发框架"><meta name=author content=xufeng8@lenovo.com><link href=../2-2_ApplicationDevelopmentNormalAgent/ rel=prev><link href=../2-4_ApplicationDevelopmentInjaTemplateFormatting/ rel=next><link rel=icon href=../assets/images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.7.0"><title>Three Node Agent - HADK</title><link rel=stylesheet href=../assets/stylesheets/main.618322db.min.css><link rel=stylesheet href=../assets/stylesheets/palette.ab4e12ef.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=pink data-md-color-accent=pink> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#conditional-routing-agent-development-example class=md-skip> Skip to content </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=Header> <a href=.. title=HADK class="md-header__button md-logo" aria-label=HADK data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> HADK </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> Three Node Agent </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=pink data-md-color-accent=pink aria-label="Dark Mode" type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title="Dark Mode" for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=pink data-md-color-accent=pink aria-label="Light Mode" type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title="Light Mode" for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=Search> <button type=reset class="md-search__icon md-icon" title=Clear aria-label=Clear tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=Tabs data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=.. class=md-tabs__link> Home </a> </li> <li class=md-tabs__item> <a href=../1-1_BasicConceptsChatNode/ class=md-tabs__link> Basic Concepts </a> </li> <li class="md-tabs__item md-tabs__item--active"> <a href=../2-1_ApplicationDevelopmentSingleNodeAgent/ class=md-tabs__link> Application Development </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=.. title=HADK class="md-nav__button md-logo" aria-label=HADK data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> HADK </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=.. class=md-nav__link> <span class=md-ellipsis> Home </span> </a> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2> <label class=md-nav__link for=__nav_2 id=__nav_2_label tabindex=0> <span class=md-ellipsis> Basic Concepts </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2> <span class="md-nav__icon md-icon"></span> Basic Concepts </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../1-1_BasicConceptsChatNode/ class=md-nav__link> <span class=md-ellipsis> Chat Node </span> </a> </li> <li class=md-nav__item> <a href=../1-2_BasicConceptsToolNode/ class=md-nav__link> <span class=md-ellipsis> Tool Node </span> </a> </li> <li class=md-nav__item> <a href=../1-3_BasicConceptsDIYNode/ class=md-nav__link> <span class=md-ellipsis> Custom Node </span> </a> </li> <li class=md-nav__item> <a href=../1-4_BasicConceptsCENode/ class=md-nav__link> <span class=md-ellipsis> CE Node </span> </a> </li> <li class=md-nav__item> <a href=../1-5_BasicConceptsChainFlow/ class=md-nav__link> <span class=md-ellipsis> Chain and Flow </span> </a> </li> <li class=md-nav__item> <a href=../1-6_BasicConceptsRoute/ class=md-nav__link> <span class=md-ellipsis> Route </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3 checked> <label class=md-nav__link for=__nav_3 id=__nav_3_label tabindex> <span class=md-ellipsis> Application Development </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=true> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> Application Development </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../2-1_ApplicationDevelopmentSingleNodeAgent/ class=md-nav__link> <span class=md-ellipsis> Single Node Agent </span> </a> </li> <li class=md-nav__item> <a href=../2-2_ApplicationDevelopmentNormalAgent/ class=md-nav__link> <span class=md-ellipsis> Normal Agent </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> Three Node Agent </span> <span class="md-nav__icon md-icon"></span> </label> <a href=./ class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> Three Node Agent </span> </a> <nav class="md-nav md-nav--secondary" aria-label="Table of contents"> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> Table of contents </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#overview class=md-nav__link> <span class=md-ellipsis> Overview </span> </a> </li> <li class=md-nav__item> <a href=#development-steps class=md-nav__link> <span class=md-ellipsis> Development Steps </span> </a> <nav class=md-nav aria-label="Development Steps"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#1-register-tools class=md-nav__link> <span class=md-ellipsis> 1. Register Tools </span> </a> </li> <li class=md-nav__item> <a href=#2-configure-decision-node-decide-node class=md-nav__link> <span class=md-ellipsis> 2. Configure Decision Node (Decide Node) </span> </a> </li> <li class=md-nav__item> <a href=#3-configure-decision-node-preprocessing-and-postprocessing class=md-nav__link> <span class=md-ellipsis> 3. Configure Decision Node Preprocessing and Postprocessing </span> </a> <nav class=md-nav aria-label="3. Configure Decision Node Preprocessing and Postprocessing"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#31-set-preprocessor-function class=md-nav__link> <span class=md-ellipsis> 3.1 Set Preprocessor Function </span> </a> </li> <li class=md-nav__item> <a href=#32-set-postprocessor-function class=md-nav__link> <span class=md-ellipsis> 3.2 Set Postprocessor Function </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#4-configure-conditional-routing class=md-nav__link> <span class=md-ellipsis> 4. Configure Conditional Routing </span> </a> </li> <li class=md-nav__item> <a href=#5-configure-search-node-web-search-node class=md-nav__link> <span class=md-ellipsis> 5. Configure Search Node (Web Search Node) </span> </a> </li> <li class=md-nav__item> <a href=#6-configure-search-node-routing class=md-nav__link> <span class=md-ellipsis> 6. Configure Search Node Routing </span> </a> </li> <li class=md-nav__item> <a href=#7-configure-answer-node-answer-node class=md-nav__link> <span class=md-ellipsis> 7. Configure Answer Node (Answer Node) </span> </a> </li> <li class=md-nav__item> <a href=#8-connect-nodes class=md-nav__link> <span class=md-ellipsis> 8. Connect Nodes </span> </a> </li> <li class=md-nav__item> <a href=#9-create-workflow-and-execute class=md-nav__link> <span class=md-ellipsis> 9. Create Workflow and Execute </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#complete-example class=md-nav__link> <span class=md-ellipsis> Complete Example </span> </a> </li> <li class=md-nav__item> <a href=#key-points class=md-nav__link> <span class=md-ellipsis> Key Points </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=../2-4_ApplicationDevelopmentInjaTemplateFormatting/ class=md-nav__link> <span class=md-ellipsis> Inja Template Formatting </span> </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label="Table of contents"> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> Table of contents </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#overview class=md-nav__link> <span class=md-ellipsis> Overview </span> </a> </li> <li class=md-nav__item> <a href=#development-steps class=md-nav__link> <span class=md-ellipsis> Development Steps </span> </a> <nav class=md-nav aria-label="Development Steps"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#1-register-tools class=md-nav__link> <span class=md-ellipsis> 1. Register Tools </span> </a> </li> <li class=md-nav__item> <a href=#2-configure-decision-node-decide-node class=md-nav__link> <span class=md-ellipsis> 2. Configure Decision Node (Decide Node) </span> </a> </li> <li class=md-nav__item> <a href=#3-configure-decision-node-preprocessing-and-postprocessing class=md-nav__link> <span class=md-ellipsis> 3. Configure Decision Node Preprocessing and Postprocessing </span> </a> <nav class=md-nav aria-label="3. Configure Decision Node Preprocessing and Postprocessing"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#31-set-preprocessor-function class=md-nav__link> <span class=md-ellipsis> 3.1 Set Preprocessor Function </span> </a> </li> <li class=md-nav__item> <a href=#32-set-postprocessor-function class=md-nav__link> <span class=md-ellipsis> 3.2 Set Postprocessor Function </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#4-configure-conditional-routing class=md-nav__link> <span class=md-ellipsis> 4. Configure Conditional Routing </span> </a> </li> <li class=md-nav__item> <a href=#5-configure-search-node-web-search-node class=md-nav__link> <span class=md-ellipsis> 5. Configure Search Node (Web Search Node) </span> </a> </li> <li class=md-nav__item> <a href=#6-configure-search-node-routing class=md-nav__link> <span class=md-ellipsis> 6. Configure Search Node Routing </span> </a> </li> <li class=md-nav__item> <a href=#7-configure-answer-node-answer-node class=md-nav__link> <span class=md-ellipsis> 7. Configure Answer Node (Answer Node) </span> </a> </li> <li class=md-nav__item> <a href=#8-connect-nodes class=md-nav__link> <span class=md-ellipsis> 8. Connect Nodes </span> </a> </li> <li class=md-nav__item> <a href=#9-create-workflow-and-execute class=md-nav__link> <span class=md-ellipsis> 9. Create Workflow and Execute </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#complete-example class=md-nav__link> <span class=md-ellipsis> Complete Example </span> </a> </li> <li class=md-nav__item> <a href=#key-points class=md-nav__link> <span class=md-ellipsis> Key Points </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=conditional-routing-agent-development-example>Conditional Routing Agent Development Example</h1> <h2 id=overview>Overview</h2> <p>The conditional routing agent demonstrates how to use HADK's conditional routing (<code>route</code>) functionality to implement complex workflows. This example implements a research assistant agent that can dynamically decide whether to continue searching for information or directly answer questions based on the current context, supporting iterative searches until sufficient information is obtained.</p> <p><strong>Workflow Diagram:</strong></p> <pre><code>Input → decide_node (Decision) → [Conditional Routing]
+                                  ├─ &quot;search&quot; → web_search_node (Web Search) → decide_node (Loop)
+                                  └─ &quot;answer&quot; → answer_node (Generate Answer) → Output
+</code></pre> <p><strong>Core Features:</strong> - Conditional routing: Dynamically select the next node based on the decision node's output - Loop workflow: Supports looping between decision node and search node until sufficient information is obtained - Context accumulation: Each search result accumulates into the context for subsequent decisions</p> <h2 id=development-steps>Development Steps</h2> <h3 id=1-register-tools>1. Register Tools</h3> <p>Same as a single node agent, you need to register the required tools first. It's recommended to wrap tool registration in separate functions:</p> <pre><code class=language-c++>#include &lt;common_tools/tools.h&gt;
+#include &lt;web_search.h&gt;
+
+std::string init_tools() {
+    // Register local tools
+    common_tools::tools::add_function_call(search_web_tool,
+        R&quot;({&quot;type&quot;:&quot;function&quot;,&quot;function&quot;:{&quot;name&quot;:&quot;search_web2&quot;,&quot;description&quot;:&quot;使用关键词搜索网页，用于获取通用的，不会随着时间变化而改变的信息，支持按国家等过滤条件获取网页内容、标题和链接信息&quot;,&quot;parameters&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;query&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;搜索查询字符串，用于在网络上搜索相关信息。关键词组合应简洁明了，避免冗余信息，同时确保能够准确反映用户问题的核心需求。关键词组合应符合搜索引擎的语法和逻辑规则&quot;,&quot;minLength&quot;:1},&quot;country&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;国家名称(必须是英文)，用于限定搜索结果来自的国家&quot;,&quot;enum&quot;:[&quot;afghanistan&quot;,&quot;albania&quot;,...]}},&quot;required&quot;:[&quot;query&quot;]}}})&quot;
+    );
+    return common_tools::tools::get_all_tools_json();
+}
+
+std::string close_tools() {
+    try {
+        common_tools::tools::shutdown_all_servers();
+    } catch (...) {
+        // Ignore exceptions during shutdown
+    }
+    return &quot;Tools closed successfully&quot;;
+}
+</code></pre> <h3 id=2-configure-decision-node-decide-node>2. Configure Decision Node (Decide Node)</h3> <p>The decision node is responsible for analyzing the current context and deciding the next action (search or answer):</p> <pre><code class=language-c++>#include &lt;chat_node/chat_node.h&gt;
+
+chat_node::chat_node_settings decide_settings;
+decide_settings.model = &quot;gpt-4o-mini&quot;;
+decide_settings.temperature = 0.7;
+decide_settings.top_p = 0.95;
+decide_settings.max_tokens = 2048;
+decide_settings.tool_choice = &quot;none&quot;; 
+const auto decide_node = std::make_shared&lt;chat_node::ChatNode&lt;std::string, std::string&gt;&gt;(decide_settings);
+</code></pre> <h3 id=3-configure-decision-node-preprocessing-and-postprocessing>3. Configure Decision Node Preprocessing and Postprocessing</h3> <h4 id=31-set-preprocessor-function>3.1 Set Preprocessor Function</h4> <p>The preprocessor function builds a decision prompt containing the question, existing context, and available actions:</p> <pre><code class=language-c++>decide_node-&gt;setPreprocessor([&amp;](const std::string&amp; in) -&gt; std::string {
+    nlohmann::json inJson = nlohmann::json::parse(in);
+
+    g_question = inJson[0][&quot;content&quot;].get&lt;std::string&gt;();
+
+    std::string prompt = build_ws_prompt(g_question, g_context);
+    inJson[0][&quot;content&quot;] = prompt;
+    return inJson.dump();
+});
+</code></pre> <p><code>build_ws_prompt</code> function example:</p> <pre><code class=language-c++>#include &lt;chrono&gt;
+#include &lt;fmt/chrono.h&gt;
+
+std::string build_ws_prompt(const std::string &amp;question, const std::string &amp;context) {
+    auto now = std::chrono::system_clock::now();
+    const std::string local_time = fmt::format(&quot;{:%Y-%m-%d %H:%M:%S}&quot;, now);
+
+    return R&quot;(### CONTEXT
+              You are a research assistant that can search the web.
+              Question: )&quot; + question + R&quot;(
+              Previous Research: )&quot; + context + R&quot;(
+
+              ### ACTION SPACE
+              [1] search
+              Description: Look up more information on the web
+              Parameters:
+                  - query (str): What to search for
+
+              [2] answer
+              Description: Answer the question with current knowledge
+              Parameters:
+                  - answer (str): Final answer to the question
+
+              ## NEXT ACTION
+              Decide the next action based on the context and available actions.
+              Return your response in this format:
+
+              ```yaml
+              thinking: |
+                  &lt;your step-by-step reasoning process&gt;
+              action: search OR answer
+              reason: |
+                  &lt;why you chose this action&gt;
+              answer: |
+                  &lt;if action is answer&gt;
+              search_query: &lt;specific search query if action is search&gt;
+              ```
+              IMPORTANT: Make sure to:
+              1. Use proper indentation (4 spaces) for all multi-line fields
+              2. Use the | character for multi-line text fields
+              3. Keep single-line fields without the | character
+        4. Current time: )&quot; + local_time + R&quot;(
+        )&quot;;
+}
+</code></pre> <h4 id=32-set-postprocessor-function>3.2 Set Postprocessor Function</h4> <p>The postprocessor function parses the YAML-formatted decision result and extracts the action type and parameters:</p> <pre><code class=language-c++>decide_node-&gt;setPostprocessor([&amp;](const std::string&amp; output) -&gt; std::string {
+    nlohmann::json output_Json = nlohmann::json::parse(output);
+
+    // Extract and clean response content (remove code block markers)
+    std::string cleaned_response = StripFenceRegex(
+        output_Json.back()[&quot;content&quot;].get&lt;std::string&gt;());
+
+    // Parse YAML
+    g_yaml_node = YAML::Load(cleaned_response);
+
+    // Check required fields
+    if (!g_yaml_node[&quot;thinking&quot;] || !g_yaml_node[&quot;action&quot;] || !g_yaml_node[&quot;reason&quot;]) {
+        std::cerr &lt;&lt; &quot;Missing required YAML fields\n&quot;;
+        return &quot;search&quot;;  // Default to search on error
+    }
+
+    // Output decision information for debugging
+    std::cout &lt;&lt; &quot;🧨 Thinking:&quot; &lt;&lt; g_yaml_node[&quot;thinking&quot;].as&lt;std::string&gt;() &lt;&lt; &quot;\n&quot;; 
+    std::cout &lt;&lt; &quot;🧨 Action:&quot; &lt;&lt; g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;🧨 Reason:&quot; &lt;&lt; g_yaml_node[&quot;reason&quot;].as&lt;std::string&gt;() &lt;&lt; &quot;\n&quot;;
+
+    // Return different values based on action type
+    if (g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() == &quot;search&quot;) {
+        return g_yaml_node[&quot;search_query&quot;].as&lt;std::string&gt;();  // Return search query
+    }
+
+    if (g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() == &quot;answer&quot;) {
+        // Build final answer prompt
+        std::string prompt = R&quot;(### CONTEXT
+Based on the following information, answer the question.
+Question: )&quot; + g_question + R&quot;(
+Research: )&quot; + g_context + R&quot;(
+
+## YOUR ANSWER:
+Provide a comprehensive answer using the research results.)&quot;;
+        return prompt;
+    }
+
+    return &quot;search&quot;;  // Default to search
+});
+</code></pre> <h3 id=4-configure-conditional-routing>4. Configure Conditional Routing</h3> <p>Use the <code>route</code> function to configure conditional routing for the decision node, selecting the next node based on the postprocessor function's output:</p> <pre><code class=language-c++>route(decide_node, [&amp;](const std::string &amp;input, const std::string &amp;output) -&gt; std::optional&lt;std::string&gt; {
+    if (g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() == &quot;search&quot;) {
+        return &quot;search&quot;;  // Route to search node
+    }
+
+    if (g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() == &quot;answer&quot;) {
+        return &quot;answer&quot;;  // Route to answer node
+    }
+
+    return std::nullopt;  // No matching route
+});
+</code></pre> <p><strong>Parameter Description:</strong> - First parameter: Source node (<code>decide_node</code>) - Second parameter: Route function that receives input and output, returns route name (<code>std::optional&lt;std::string&gt;</code>)</p> <h3 id=5-configure-search-node-web-search-node>5. Configure Search Node (Web Search Node)</h3> <p>The search node uses <code>ToolNode</code> to invoke tools and process results. <code>ToolNode</code> provides a structured way to call tools with preprocessor and postprocessor functions:</p> <pre><code class=language-c++>#include &lt;tool_node/tool_node.h&gt;
+
+const auto web_search_node = std::make_shared&lt;tool_node::ToolNode&lt;std::string, std::string&gt;&gt;();
+
+// Set preprocessor to convert search query to tool input format
+web_search_node-&gt;setPreprocessor([&amp;](const std::string&amp; in) -&gt; std::string {
+    // Build tool arguments JSON
+    nlohmann::json tool_args_json;
+    tool_args_json[&quot;query&quot;] = in;  // input is the search query string
+
+    // Build ToolNode input format: contains tool name and arguments
+    nlohmann::json tool_input_json;
+    tool_input_json[&quot;name&quot;] = &quot;search_web2&quot;;  // Specify tool name
+    tool_input_json[&quot;arguments&quot;] = tool_args_json.dump();  // Arguments must be JSON string
+
+    return tool_input_json.dump();
+});
+
+// Set postprocessor to extract and process search results
+web_search_node-&gt;setPostprocessor([&amp;](const std::string&amp; output) -&gt; std::string {
+    nlohmann::json ws_out_json = nlohmann::json::parse(output);
+    std::string web_content;
+
+    try {
+        // Extract actual search results from wrapped JSON
+        if (ws_out_json.contains(&quot;content&quot;) &amp;&amp; 
+            ws_out_json[&quot;content&quot;].is_array() &amp;&amp; 
+            !ws_out_json[&quot;content&quot;].empty()) {
+            const auto &amp;first = ws_out_json[&quot;content&quot;][0];
+            if (first.contains(&quot;type&quot;) &amp;&amp; 
+                first[&quot;type&quot;].get&lt;std::string&gt;() == &quot;text&quot; &amp;&amp; 
+                first.contains(&quot;text&quot;)) {
+                // Parse actual search results again
+                std::string inner_json_str = first[&quot;text&quot;].get&lt;std::string&gt;();
+                nlohmann::json ws_payload = nlohmann::json::parse(inner_json_str);
+
+                // Extract and format search results
+                if (ws_payload.contains(&quot;responses&quot;) &amp;&amp; 
+                    ws_payload[&quot;responses&quot;].is_array()) {
+                    for (const auto &amp;resp : ws_payload[&quot;responses&quot;]) {
+                        web_content +=
+                            &quot;TITLE: &quot; + resp[&quot;title&quot;].get&lt;std::string&gt;() +
+                            &quot;\nURL: &quot; + resp[&quot;url&quot;].get&lt;std::string&gt;() +
+                            &quot;\nSNIPPET: &quot; + resp[&quot;snippet&quot;].get&lt;std::string&gt;() +
+                            &quot;\n\n&quot;;
+                    }
+                }
+            }
+        }
+    } catch (const std::exception &amp;e) {
+        std::cout &lt;&lt; &quot;解析 ws_out 失败: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+    }
+
+    // Accumulate context
+    std::string new_context = 
+        g_context +
+        &quot;\n\nSEARCH: &quot; + (!g_query.empty() ? g_query : &quot;No query&quot;) +
+        &quot;\n\nRESULTS: \n&quot; + 
+        (!web_content.empty() ? web_content : &quot;No results&quot;);
+
+    g_context = new_context;
+
+    // Return question for re-entering decision node
+    nlohmann::json output_json = nlohmann::json::array();
+    output_json.push_back({{&quot;role&quot;, &quot;user&quot;}, {&quot;content&quot;, g_question}});
+    return output_json.dump();
+});
+</code></pre> <h3 id=6-configure-search-node-routing>6. Configure Search Node Routing</h3> <p>The search node always returns to the decision node after execution, forming a loop:</p> <pre><code class=language-c++>route(web_search_node, [&amp;](const std::string &amp;input, const std::string &amp;output) -&gt; std::optional&lt;std::string&gt; {
+    return &quot;decide&quot;;  // Always route back to decision node
+});
+</code></pre> <h3 id=7-configure-answer-node-answer-node>7. Configure Answer Node (Answer Node)</h3> <p>The answer node generates the final answer:</p> <pre><code class=language-c++>chat_node::chat_node_settings s_answer;
+s_answer.model = &quot;gpt-4o-mini&quot;;
+s_answer.temperature = 0.7;
+s_answer.top_p = 0.95;
+s_answer.max_tokens = 4096;
+s_answer.tool_choice = &quot;none&quot;;
+
+const auto answer_node = std::make_shared&lt;chat_node::ChatNode&lt;std::string, std::string&gt;&gt;(s_answer);
+
+answer_node-&gt;setPreprocessor([&amp;](const std::string &amp;in) -&gt; std::string {
+    // Convert input to Chat Completion format
+    nlohmann::json inJson = nlohmann::json::array();
+    inJson.push_back({{&quot;role&quot;, &quot;user&quot;}, {&quot;content&quot;, in}});
+    return inJson.dump();
+});
+</code></pre> <h3 id=8-connect-nodes>8. Connect Nodes</h3> <p>Use the <code>chain</code> function to establish connections between nodes:</p> <pre><code class=language-c++>// Decision node to search node
+nodeflow::chain(decide_node, web_search_node, &quot;search&quot;);
+
+// Decision node to answer node
+nodeflow::chain(decide_node, answer_node, &quot;answer&quot;);
+
+// Search node back to decision node (forms loop)
+nodeflow::chain(web_search_node, decide_node, &quot;decide&quot;);
+</code></pre> <h3 id=9-create-workflow-and-execute>9. Create Workflow and Execute</h3> <pre><code class=language-c++>// Create workflow
+auto f = std::make_shared&lt;nodeflow::Flow&gt;();
+
+// Set start node
+f-&gt;start(decide_node);
+
+// Execute workflow
+auto result = f-&gt;runWithInput&lt;std::string, std::string&gt;(question);
+</code></pre> <p><strong>Execution Flow:</strong> 1. Input question enters <code>decide_node</code> 2. <code>decide_node</code> analyzes context and decides to search or answer 3. If search is chosen: - Route to <code>web_search_node</code> to execute search - Search results accumulate into context - Route back to <code>decide_node</code> (loop) 4. If answer is chosen: - Route to <code>answer_node</code> to generate final answer - Return result</p> <h2 id=complete-example>Complete Example</h2> <p>The following is a complete conditional routing agent implementation example:</p> <pre><code class=language-c++>#include &quot;koba_agent.h&quot;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;regex&gt;
+#include &lt;fmt/chrono.h&gt;
+
+#include &lt;chat_node/chat_node.h&gt;
+#include &lt;common_tools/tools.h&gt;
+#include &lt;tool_node/tool_node.h&gt;
+#include &lt;nlohmann/json.hpp&gt;
+#include &lt;web_search.h&gt;
+#include &lt;yaml-cpp/yaml.h&gt;
+
+std::string StripFenceRegex(std::string s) {
+    s = std::regex_replace(s, std::regex(R&quot;(^\s*```[^\r\n]*\r?\n)&quot;), &quot;&quot;);
+    s = std::regex_replace(s, std::regex(R&quot;((?:\r?\n)?\s*```\s*$)&quot;), &quot;&quot;);
+    return s;
+}
+
+std::string build_ws_prompt(const std::string &amp;question, const std::string &amp;context) {
+    auto now = std::chrono::system_clock::now();
+    const std::string local_time = fmt::format(&quot;{:%Y-%m-%d %H:%M:%S}&quot;, now);
+
+    return R&quot;(### CONTEXT
+              You are a research assistant that can search the web.
+              Question: )&quot; + question + R&quot;(
+              Previous Research: )&quot; + context + R&quot;(
+
+              ### ACTION SPACE
+              [1] search
+              Description: Look up more information on the web
+              Parameters:
+                  - query (str): What to search for
+
+              [2] answer
+              Description: Answer the question with current knowledge
+              Parameters:
+                  - answer (str): Final answer to the question
+
+              ## NEXT ACTION
+              Decide the next action based on the context and available actions.
+              Return your response in this format:
+
+              ```yaml
+              thinking: |
+                  &lt;your step-by-step reasoning process&gt;
+              action: search OR answer
+              reason: |
+                  &lt;why you chose this action&gt;
+              answer: |
+                  &lt;if action is answer&gt;
+              search_query: &lt;specific search query if action is search&gt;
+              ```
+              IMPORTANT: Make sure to:
+              1. Use proper indentation (4 spaces) for all multi-line fields
+              2. Use the | character for multi-line text fields
+              3. Keep single-line fields without the | character
+        4. Current time: )&quot; + local_time + R&quot;(
+        )&quot;;
+}
+
+std::string init_tools() {
+    common_tools::tools::add_function_call(search_web_tool,
+        R&quot;({&quot;type&quot;:&quot;function&quot;,&quot;function&quot;:{&quot;name&quot;:&quot;search_web2&quot;,&quot;description&quot;:&quot;使用关键词搜索网页，用于获取通用的，不会随着时间变化而改变的信息，支持按国家等过滤条件获取网页内容、标题和链接信息&quot;,&quot;parameters&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;query&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;搜索查询字符串，用于在网络上搜索相关信息。关键词组合应简洁明了，避免冗余信息，同时确保能够准确反映用户问题的核心需求。关键词组合应符合搜索引擎的语法和逻辑规则&quot;,&quot;minLength&quot;:1},&quot;country&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;国家名称(必须是英文)，用于限定搜索结果来自的国家&quot;,&quot;enum&quot;:[&quot;afghanistan&quot;,&quot;albania&quot;,...]}},&quot;required&quot;:[&quot;query&quot;]}}})&quot;
+    );
+    return common_tools::tools::get_all_tools_json();
+}
+
+std::string close_tools() {
+    try {
+        common_tools::tools::shutdown_all_servers();
+    } catch (...) {
+        // Ignore exceptions during shutdown
+    }
+    return &quot;Tools closed successfully&quot;;
+}
+
+std::string koba_agent(const std::string&amp; message) {
+    std::cout &lt;&lt; &quot;Running agent...&quot; &lt;&lt; std::endl;
+
+    // State variables
+    std::string g_context = &quot;&quot;;
+    std::string g_question = &quot;&quot;;
+    std::string g_query;
+    YAML::Node g_yaml_node = YAML::Node();
+
+        // Configure decision node
+        chat_node::chat_node_settings decide_settings;
+        decide_settings.model = &quot;gpt-4o-mini&quot;;
+        decide_settings.temperature = 0.7;
+        decide_settings.top_p = 0.95;
+        decide_settings.max_tokens = 2048;
+        decide_settings.tool_choice = &quot;none&quot;;
+        const auto decide_node = std::make_shared&lt;chat_node::ChatNode&lt;std::string, std::string&gt;&gt;(decide_settings);
+
+        // Set decision node's preprocessor function
+        decide_node-&gt;setPreprocessor([&amp;](const std::string&amp; in) -&gt; std::string {
+            nlohmann::json inJson = nlohmann::json::parse(in);
+            g_question = inJson[0][&quot;content&quot;].get&lt;std::string&gt;();
+            std::string prompt = build_ws_prompt(g_question, g_context);
+            inJson[0][&quot;content&quot;] = prompt;
+            return inJson.dump();
+        });
+
+        decide_node-&gt;setPostprocessor([&amp;](const std::string&amp; output) -&gt; std::string {
+            nlohmann::json output_Json = nlohmann::json::parse(output);
+            std::string cleaned_response = StripFenceRegex(
+                output_Json.back()[&quot;content&quot;].get&lt;std::string&gt;());
+
+            g_yaml_node = YAML::Load(cleaned_response);
+
+            if (!g_yaml_node[&quot;thinking&quot;] || !g_yaml_node[&quot;action&quot;] || !g_yaml_node[&quot;reason&quot;]) {
+                std::cerr &lt;&lt; &quot;Missing required YAML fields\n&quot;;
+                return &quot;search&quot;;
+            }
+
+            std::cout &lt;&lt; &quot;🧨 Thinking:&quot; &lt;&lt; g_yaml_node[&quot;thinking&quot;].as&lt;std::string&gt;() &lt;&lt; &quot;\n&quot;; 
+            std::cout &lt;&lt; &quot;🧨 Action:&quot; &lt;&lt; g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() &lt;&lt; &quot;\n&quot;;
+            std::cout &lt;&lt; &quot;🧨 Reason:&quot; &lt;&lt; g_yaml_node[&quot;reason&quot;].as&lt;std::string&gt;() &lt;&lt; &quot;\n&quot;;
+
+            if (g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() == &quot;search&quot;) {
+                return g_yaml_node[&quot;search_query&quot;].as&lt;std::string&gt;();
+            }
+
+            if (g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() == &quot;answer&quot;) {
+                std::string prompt = R&quot;(### CONTEXT
+Based on the following information, answer the question.
+Question: )&quot; + g_question + R&quot;(
+Research: )&quot; + g_context + R&quot;(
+
+## YOUR ANSWER:
+Provide a comprehensive answer using the research results.)&quot;;
+                return prompt;
+            }
+
+            return &quot;search&quot;;
+        });
+
+        // Configure decision node's conditional routing
+        route(decide_node, [&amp;](const std::string &amp;input, const std::string &amp;output) -&gt; std::optional&lt;std::string&gt; {
+            if (g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() == &quot;search&quot;) {
+                return &quot;search&quot;;
+            }
+            if (g_yaml_node[&quot;action&quot;].as&lt;std::string&gt;() == &quot;answer&quot;) {
+                return &quot;answer&quot;;
+            }
+            return std::nullopt;
+        });
+
+        // Configure search node using ToolNode
+        const auto web_search_node = std::make_shared&lt;tool_node::ToolNode&lt;std::string, std::string&gt;&gt;();
+
+        web_search_node-&gt;setPreprocessor([&amp;](const std::string&amp; in) -&gt; std::string {
+            // Build tool arguments JSON
+            nlohmann::json tool_args_json;
+            tool_args_json[&quot;query&quot;] = in;
+
+            // Build ToolNode input format: contains tool name and arguments
+            nlohmann::json tool_input_json;
+            tool_input_json[&quot;name&quot;] = &quot;search_web2&quot;;  // Specify tool name
+            tool_input_json[&quot;arguments&quot;] = tool_args_json.dump();  // Arguments must be JSON string
+
+            return tool_input_json.dump();
+        });
+
+        web_search_node-&gt;setPostprocessor([&amp;](const std::string&amp; output) -&gt; std::string {
+            nlohmann::json ws_out_json = nlohmann::json::parse(output);
+            std::string web_content;
+
+            try {
+                if (ws_out_json.contains(&quot;content&quot;) &amp;&amp; 
+                    ws_out_json[&quot;content&quot;].is_array() &amp;&amp; 
+                    !ws_out_json[&quot;content&quot;].empty()) {
+                    const auto &amp;first = ws_out_json[&quot;content&quot;][0];
+                    if (first.contains(&quot;type&quot;) &amp;&amp; 
+                        first[&quot;type&quot;].get&lt;std::string&gt;() == &quot;text&quot; &amp;&amp; 
+                        first.contains(&quot;text&quot;)) {
+                        std::string inner_json_str = first[&quot;text&quot;].get&lt;std::string&gt;();
+                        // Parse actual search results again
+                        nlohmann::json ws_payload = nlohmann::json::parse(inner_json_str);
+                        if (ws_payload.contains(&quot;responses&quot;) &amp;&amp; 
+                            ws_payload[&quot;responses&quot;].is_array()) {
+                            for (const auto &amp;resp : ws_payload[&quot;responses&quot;]) {
+                                web_content +=
+                                    &quot;TITLE: &quot; + resp[&quot;title&quot;].get&lt;std::string&gt;() +
+                                    &quot;\nURL: &quot; + resp[&quot;url&quot;].get&lt;std::string&gt;() +
+                                    &quot;\nSNIPPET: &quot; + resp[&quot;snippet&quot;].get&lt;std::string&gt;() +
+                                    &quot;\n\n&quot;;
+                            }
+                        }
+                    }
+                }
+            } catch (const std::exception &amp;e) {
+                std::cout &lt;&lt; &quot;解析 ws_out 失败: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+            }
+
+            // Accumulate context
+            std::string new_context = 
+                g_context +
+                &quot;\n\nSEARCH: &quot; + (!g_query.empty() ? g_query : &quot;No query&quot;) +
+                &quot;\n\nRESULTS: \n&quot; + 
+                (!web_content.empty() ? web_content : &quot;No results&quot;);
+
+            g_context = new_context;
+
+            // Return question for re-entering decision node
+            nlohmann::json output_json = nlohmann::json::array();
+            output_json.push_back({{&quot;role&quot;, &quot;user&quot;}, {&quot;content&quot;, g_question}});
+            return output_json.dump();
+        });
+
+        // Configure search node's routing (always returns to decision node)
+        route(web_search_node, [&amp;](const std::string &amp;input, const std::string &amp;output) -&gt; std::optional&lt;std::string&gt; {
+            return &quot;decide&quot;;
+        });
+
+        // Configure answer node
+        chat_node::chat_node_settings s_answer;
+        s_answer.model = &quot;gpt-4o-mini&quot;;
+        s_answer.temperature = 0.7;
+        s_answer.top_p = 0.95;
+        s_answer.max_tokens = 4096;
+        s_answer.tool_choice = &quot;none&quot;;
+        const auto answer_node = std::make_shared&lt;chat_node::ChatNode&lt;std::string, std::string&gt;&gt;(s_answer);
+        answer_node-&gt;setPreprocessor([&amp;](const std::string &amp;in) -&gt; std::string {
+            nlohmann::json inJson = nlohmann::json::array();
+            inJson.push_back({{&quot;role&quot;, &quot;user&quot;}, {&quot;content&quot;, in}});
+            return inJson.dump();
+        });
+
+        // Connect nodes
+        nodeflow::chain(decide_node, web_search_node, &quot;search&quot;);
+        nodeflow::chain(decide_node, answer_node, &quot;answer&quot;);
+        nodeflow::chain(web_search_node, decide_node, &quot;decide&quot;);
+
+        // Create workflow and execute
+        auto koba_flow = std::make_shared&lt;nodeflow::Flow&gt;();
+        koba_flow-&gt;start(decide_node);
+        auto result = koba_flow-&gt;runWithInput&lt;std::string, std::string&gt;(message);
+
+        return result;
+}
+
+int main() {
+    // Initialize tools
+    init_tools();
+
+    // Build input message
+    nlohmann::json inputJson = nlohmann::json::array();
+    inputJson.push_back({
+        {&quot;role&quot;, &quot;user&quot;},
+        {&quot;content&quot;, &quot;What is the capital of France?&quot;}
+    });
+
+    // Call agent and get response
+    std::string response = koba_agent(inputJson.dump());
+
+    // Output result
+    std::cout &lt;&lt; response &lt;&lt; std::endl;
+
+    // Close tools
+    close_tools();
+
+    return 0;
+}
+</code></pre> <h2 id=key-points>Key Points</h2> <ol> <li><strong>Conditional Routing</strong>: Use the <code>route</code> function to dynamically select the next node based on node output</li> <li><strong>Loop Workflow</strong>: Routing can implement loops between nodes, supporting iterative search</li> <li><strong>Context Management</strong>: Use global variables or state objects to manage context information in workflows</li> <li><strong>YAML Parsing</strong>: Decision node returns YAML format, needs to be parsed to extract action type and parameters</li> <li><strong>Tool Invocation</strong>: Use <code>ToolNode</code> to invoke tools with structured preprocessor and postprocessor functions</li> <li><strong>ToolNode vs OneFuncNode</strong>: <code>ToolNode</code> provides a more structured way to call tools, with automatic handling of tool invocation format, while <code>OneFuncNode</code> requires manual tool invocation using <code>call_tool</code></li> </ol> </article> </div> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2025 LATC CTOO Lenovo Group </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.annotate", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../assets/javascripts/bundle.e71a0d61.min.js></script> </body> </html>

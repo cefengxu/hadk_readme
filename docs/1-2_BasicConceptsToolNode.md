@@ -99,7 +99,13 @@ std::string arguments = params.dump();
 std::string result = common_tools::tools::call_tool("search_news", arguments);
 ```
 
-For local tool development specifications, please refer to `Local Tool Development Specifications`.
+For local tool development sample, please refer to [link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/local_tools/tavily?ref_type=heads).
+
+### Tool Input Format
+The tool input format should follow the function call response format defined by the OpenAI Chat Completions API, as shown below:
+```json
+ {"arguments":"{\"query\":\"San Francisco weather December 1 2025\"}","name":"search_web2"}
+```
 
 ### Tool Output Format
 
@@ -121,10 +127,19 @@ Tool output results strictly follow the OpenAI Chat Completion API's Function Ca
 - `content`: Result content array, each element contains `type` and `text` fields
 - `isError`: Boolean value indicating whether an error occurred
 
-**Example Code:**
+### Optional: Call the Tool in Custom Code**
+
+You can invoke the custom tool’s API directly, as shown below, [ref link about Custom Code](https://cefengxu.github.io/hadk_readme/1-3_BasicConceptsDIYNode/):
 
 ```c++
-std::string result = common_tools::tools::call_tool("search_news", arguments);
+
+// 构建工具参数 JSON
+nlohmann::json arguments = {
+  {"name", "search_web2"},
+  {"arguments", nlohmann::json{{"query", in}}.dump()}
+};
+
+std::string result = common_tools::tools::call_tool("search_news", arguments.dump());
 nlohmann::json result_json = nlohmann::json::parse(result);
 
 if (!result_json["isError"].get<bool>()) {
