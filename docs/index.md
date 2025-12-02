@@ -38,6 +38,7 @@ Welcome to the HADK framework development documentation!
 - [Normal Agent](2-2_ApplicationDevelopmentNormalAgent.md) - Normal agent development example
 - [Three Node Agent](2-3_ApplicationDevelopmentThreeNodeAgent.md) - Three node agent development example
 - [Inja Template Formatting](2-4_ApplicationDevelopmentInjaTemplateFormatting.md) - Inja template engine tutorial
+- [CoT Agent](2-5_ApplicationDevelopmentCoTAgent.md) - CoT (Chain of Thought) agent development example
 
 ## Getting Started
 
