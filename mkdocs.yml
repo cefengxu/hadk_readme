@@ -48,6 +48,8 @@ nav:
     - CoT Agent: 2-5_ApplicationDevelopmentCoTAgent.md
     - Batch Node: 2-6_ApplicationDevelopmentBatchNode.md
     - Chat Bot: 2-7_ApplicationChatBot.md
+  - Android:
+    - Android Platform: 3-1_AndroidPlatform.md
 
 # 插件配置
 plugins:
