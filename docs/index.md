@@ -1,6 +1,6 @@
 # HADK Development Documentation
 
-Welcome to the HADK framework development documentation!
+Welcome to the HADK framework development documentation.
 
 ## What It Is
 
@@ -40,11 +40,15 @@ Welcome to the HADK framework development documentation!
 - [Inja Template Formatting](2-4_ApplicationDevelopmentInjaTemplateFormatting.md) - Inja template engine tutorial
 - [CoT Agent](2-5_ApplicationDevelopmentCoTAgent.md) - CoT (Chain of Thought) agent development example
 - [Batch Node](2-6_ApplicationDevelopmentBatchNode.md) - Batch Node development example
-- [Chat Bot](2-7_ApplicationDevelopmentChatBot.md) - Simple Chat Bot development example
+- [Chat Bot](2-7_ApplicationChatBot.md) - Simple Chat Bot development example
 
 ## Getting Started
 
-Please select the chapter you're interested in from the left navigation bar to start reading.
+Please download the HADK dynamic library from this [link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dyl)
+
+Selecting the chapter you're interested in from the left navigation bar to start reading. 
+
+We came here to code and chew bubblegum... and I'm all out of bubblegum !
 
 ## Acknowledgments
 
