@@ -3,7 +3,7 @@
 ## Overview
 
 In this example, we will construct only one Chat Node from HADK to materialize an Agent that can understand or invoke functions automatically according to user's query.
-[link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/single_node?ref_type=heads)
+[ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/single_node?ref_type=heads)
 
 ## Environment Configuration
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This example demonstrates how to use CoT (Chain of Thought) nodes from HADK to create an Agent that can solve complex problems through step-by-step reasoning.
+This example demonstrates how to use CoT (Chain of Thought) nodes from HADK to create an Agent that can solve complex problems through step-by-step reasoning. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/cot_agent?ref_type=heads)
 
 ## Question Ref.
 - If a train travels 60 miles in 1 hour and then 90 miles in 1.5 hours, what is its average speed for the entire trip?

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This example demonstrates how to construct a simple interactive chat bot (`loop_chat.cpp`) based on [Single Node Agent](https://cefengxu.github.io/hadk_readme/2-1_ApplicationDevelopmentSingleNodeAgent/). The chat bot supports multi-turn conversations with automatic history management.
+This example demonstrates how to construct a simple interactive chat bot (`loop_chat.cpp`) based on [Single Node Agent](https://cefengxu.github.io/hadk_readme/2-1_ApplicationDevelopmentSingleNodeAgent/). The chat bot supports multi-turn conversations with automatic history management. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/blob/main/loop_chat.cpp?ref_type=heads)
 
 ## Environment Configuration
 

@@ -47,7 +47,7 @@ nav:
     - Inja Template Formatting: 2-4_ApplicationDevelopmentInjaTemplateFormatting.md
     - CoT Agent: 2-5_ApplicationDevelopmentCoTAgent.md
     - Batch Node: 2-6_ApplicationDevelopmentBatchNode.md
-    - Chat Bot: 2-7_ApplicationDevelopmentChatBot.md
+    - Chat Bot: 2-7_ApplicationChatBot.md
 
 # 插件配置
 plugins:
