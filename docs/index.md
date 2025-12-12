@@ -42,6 +42,10 @@ Welcome to the HADK framework development documentation.
 - [Batch Node](2-6_ApplicationDevelopmentBatchNode.md) - Batch Node development example
 - [Chat Bot](2-7_ApplicationChatBot.md) - Simple Chat Bot development example
 
+### Android
+
+- [Android Platform](3-1_AndroidPlatform.md) - Cross Compilation and Android Project
+
 ## Getting Started
 
 Please download the HADK dynamic library from this [link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dyl)
