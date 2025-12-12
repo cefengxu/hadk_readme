@@ -5,7 +5,7 @@
 export LLM_API_KEY=&quot;sk-zkxxxa5944&quot;
 export TAVILY_API_URL=&quot;https://api.tavily.com/search&quot;
 export TAVILY_API_KEY=&quot;tvly-dev-DPxxxwkFxVHPIf4D&quot;
-</code></pre> <h2 id=api-functions>API Functions</h2> <h3 id=1-init_loc_tools>1. init_loc_tools()</h3> <p>Initialize and register local tools.</p> <p><strong>Function Signature:</strong></p> <pre><code class=language-c++>bool init_loc_tools();
+</code></pre> <p><code>LLM_API_URL</code> and <code>LLM_API_KEY</code> can be configured using <code>chat_node::chat_node_settings</code>, For more details, please refer to <a href=https://cefengxu.github.io/hadk_readme/1-1_BasicConceptsChatNode/ >BasicConceptsChatNode</a> </p> <h2 id=api-functions>API Functions</h2> <h3 id=1-init_loc_tools>1. init_loc_tools()</h3> <p>Initialize and register local tools.</p> <p><strong>Function Signature:</strong></p> <pre><code class=language-c++>bool init_loc_tools();
 </code></pre> <p><strong>Description:</strong> - Registers local tools (e.g., <code>search_web2</code> for web search) - Returns <code>true</code> on success, <code>false</code> on failure</p> <p><strong>Example:</strong></p> <pre><code class=language-c++>#include &quot;src/reflector_agent/koba_agent.h&quot;
 
 bool reg_loc_tools = init_loc_tools();
