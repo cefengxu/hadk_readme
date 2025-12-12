@@ -20,6 +20,8 @@ export TAVILY_API_URL="https://api.tavily.com/search"
 export TAVILY_API_KEY="tvly-dev-DPxxxwkFxVHPIf4D"
 ```
 
+`LLM_API_URL` and  `LLM_API_KEY` can be configured using `chat_node::chat_node_settings`, For more details, please refer to [BasicConceptsChatNode](https://cefengxu.github.io/hadk_readme/1-1_BasicConceptsChatNode/) 
+
 ## API Functions
 
 ### 1. init_loc_tools()

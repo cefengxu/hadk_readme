@@ -8,12 +8,35 @@ Build a chat node in the following way, allowing parameter configuration for mod
 
 ```c++
 chat_node::chat_node_settings s_generate;
+s_generate.llm_mode = chat_node::LLMMode::OpenAI;  //default
+s_generate.llm_url = "http://3rd/api/chat";
+s_generate.llm_key = "3rdkey"; 
 s_generate.model = "gpt-4.1";
 s_generate.temperature = 0.7;
 s_generate.top_p = 0.95;
 s_generate.max_tokens = 4096;
 s_generate.tool_choice = "none";
 const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(s_generate);
+```
+Currently, two LLM Modes are supported, allowing you to use a local Ollama model via:
+
+```c++
+chat_node::chat_node_settings s_generate;
+s_generate.llm_mode = chat_node::LLMMode::Ollama;
+s_generate.model = "qwen3-vl:4b"; // model to use
+s_generate.llm_url = "http://127.0.0.1:11434/api/chat";
+s_generate.llm_key = "";
+s_generate.temperature = 0.7;
+s_generate.top_p = 0.95;
+s_generate.max_tokens = 4096;
+s_generate.tool_choice = "none";
+const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(s_generate);
+```
+Otherwise , you can configure the following environment variables for LLM Model:
+
+```bash
+export LLM_API_URL="https://xxx/v1/chat/completions"
+export LLM_API_KEY="sk-zkxxxa5944"
 ```
 
 ## Chat Node Input and Output
