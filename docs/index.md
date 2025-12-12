@@ -1,6 +1,8 @@
 # HADK Development Documentation
 
-Welcome to the HADK framework development documentation.
+Welcome to the HADK framework development documentation. 
+
+*We came here to code a Hybrid Agent and chew bubblegum... and I'm all out of bubblegum !*
 
 ## What It Is
 
@@ -52,7 +54,6 @@ Please download the HADK dynamic library from this [link](https://gitlab.xpaas.l
 
 Selecting the chapter you're interested in from the left navigation bar to start reading. 
 
-We came here to code and chew bubblegum... and I'm all out of bubblegum !
 
 ## Acknowledgments
 
