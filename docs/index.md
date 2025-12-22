@@ -6,6 +6,8 @@ Welcome to the HADK framework development documentation.
 
 ## What It Is
 
+![HADK Logo](assets/HADK_INTRO.png)
+
 **HADK (Hybrid Agent Development Kit)** is a C++-based, cross-platform framework for building intelligent agents. Built on computational graph principles, it offers a modular architecture with rich functional nodes and flexible orchestration. Developers can quickly create agents with advanced reasoning, tool integration, and multimodal capabilities that run seamlessly across Windows, Linux, and Android.
 
 ## Its Advantages

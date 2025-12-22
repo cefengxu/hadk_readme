@@ -99,14 +99,6 @@ std::string arguments = params.dump();
 std::string result = common_tools::tools::call_tool("search_news", arguments);
 ```
 
-For local tool development sample, please refer to [link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/local_tools/tavily?ref_type=heads).
-
-### Tool Input Format
-The tool input format should follow the function call response format defined by the OpenAI Chat Completions API, as shown below:
-```json
- {"arguments":"{\"query\":\"San Francisco weather December 1 2025\"}","name":"search_web2"}
-```
-
 ### Tool Output Format
 
 Tool output results strictly follow the OpenAI Chat Completion API's Function Call response format, returned as `std::string` type. The output is in JSON format:
@@ -126,6 +118,10 @@ Tool output results strictly follow the OpenAI Chat Completion API's Function Ca
 **Field Description:**
 - `content`: Result content array, each element contains `type` and `text` fields
 - `isError`: Boolean value indicating whether an error occurred
+
+For local tool development sample, please refer to [link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/local_tools/tavily?ref_type=heads).
+
+
 
 ### Optional: Call the Tool in Custom Code**
 
