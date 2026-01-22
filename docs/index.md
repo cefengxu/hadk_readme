@@ -31,7 +31,7 @@ Welcome to the HADK framework development documentation.
 
 - [Chat Node](1-1_BasicConceptsChatNode.md) - Chat node integrated with large language models
 - [Tool Node](1-2_BasicConceptsToolNode.md) - Tool management node
-- [Custom Node](1-3_BasicConceptsDIYNode.md) - User-defined node for custom logic
+- [Custom Node](1-3_BasicConceptsCustomNode.md) - User-defined node for custom logic
 - [CE Node](1-4_BasicConceptsCENode.md) - Context engine node for managing conversation history
 - [Chain and Flow](1-5_BasicConceptsChainFlow.md) - Workflow management
 - [Route](1-6_BasicConceptsRoute.md) - Routing node
