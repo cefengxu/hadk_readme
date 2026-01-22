@@ -2,7 +2,7 @@
 
 ## Overview
 
-The conditional routing agent demonstrates how to use HADK's conditional routing (`route`) functionality to implement complex workflows. This example implements a research assistant agent that can dynamically decide whether to continue searching for information or directly answer questions based on the current context, supporting iterative searches until sufficient information is obtained. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/reflector_agent?ref_type=heads)
+The conditional routing agent demonstrates how to use HADK's conditional routing (`route`) functionality to implement complex workflows. This example implements a research assistant agent that can dynamically decide whether to continue searching for information or directly answer questions based on the current context, supporting iterative searches until sufficient information is obtained. [ref. link](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/reflector_agent?ref_type=heads)
 
 **Workflow Diagram:**
 ```

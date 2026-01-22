@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this example, we will construct only one Chat Node from HADK to materialize an Agent that can understand or invoke functions automatically according to user's query. This is a simple agent implementation that creates a single Chat Node and Flow for each request. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/single_node?ref_type=heads)
+In this example, we will construct only one Chat Node from HADK to materialize an Agent that can understand or invoke functions automatically according to user's query. This is a simple agent implementation that creates a single Chat Node and Flow for each request. [ref. link](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/single_node?ref_type=heads)
 
 ## Environment Configuration
 

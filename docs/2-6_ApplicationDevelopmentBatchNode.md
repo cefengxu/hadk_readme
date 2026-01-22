@@ -2,7 +2,7 @@
 
 ## Overview
 
-This example demonstrates how to use HADK `BatchFuncNode` to build a simple batch processing flow, where multiple text inputs are generated, processed in batch, and then routed to the next node. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/batch_flow?ref_type=heads)
+This example demonstrates how to use HADK `BatchFuncNode` to build a simple batch processing flow, where multiple text inputs are generated, processed in batch, and then routed to the next node. [ref. link](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/batch_flow?ref_type=heads)
 
 **Workflow Diagram:**
 ```

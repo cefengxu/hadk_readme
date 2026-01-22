@@ -2,7 +2,7 @@
 
 ## Overview
 
-This example demonstrates how to construct a simple interactive chat bot based on Single Node Agent. The chat bot supports multi-turn conversations with automatic history management using the Runner pattern. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/chat_bot?ref_type=heads)
+This example demonstrates how to construct a simple interactive chat bot based on Single Node Agent. The chat bot supports multi-turn conversations with automatic history management using the Runner pattern. [ref. link](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/chat_bot?ref_type=heads)
 
 **Workflow Diagram:**
 ```
