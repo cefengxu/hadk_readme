@@ -2,7 +2,7 @@
 
 ## Overview
 
-This example demonstrates how to use CoT (Chain of Thought) nodes from HADK to create an Agent that can solve complex problems through step-by-step reasoning. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/cot_agent?ref_type=heads)
+This example demonstrates how to use CoT (Chain of Thought) nodes from HADK to create an Agent that can solve complex problems through step-by-step reasoning. [ref. link](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/cot_agent?ref_type=heads)
 
 **Workflow Diagram:**
 ```

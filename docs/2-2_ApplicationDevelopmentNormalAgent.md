@@ -2,7 +2,7 @@
 
 ## Overview
 
-The normal agent demonstrates how to use HADK's sequential workflow with context compression to implement a three-stage question-answering system. This example implements an agent that compresses conversation context, generates responses using LLM with tool support, and then polishes the final answer. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/normal_agent?ref_type=heads)
+The normal agent demonstrates how to use HADK's sequential workflow with context compression to implement a three-stage question-answering system. This example implements an agent that compresses conversation context, generates responses using LLM with tool support, and then polishes the final answer. [ref. link](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/normal_agent?ref_type=heads)
 
 **Workflow Diagram:**
 ```
