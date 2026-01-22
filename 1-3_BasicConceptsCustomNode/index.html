@@ -28,7 +28,7 @@ custom_node-&gt;setPostprocessor([](const std::string&amp; output) -&gt; std::st
 });
 
 // Configration of Routing to next Node. 
-route(custom_node_, [&amp;](const std::string&amp;, const std::string&amp; output) -&gt; std::optional&lt;std::string&gt; {
+route(custom_node, [&amp;](const std::string&amp;, const std::string&amp; output) -&gt; std::optional&lt;std::string&gt; {
         // setting routing value 'polish'
         return &quot;next_node&quot;;
     });
