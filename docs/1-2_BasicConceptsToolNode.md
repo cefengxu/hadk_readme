@@ -125,7 +125,7 @@ For local tool development sample, please refer to [link](https://gitlab.xpaas.l
 
 ### Optional: Call the Tool in Custom Code**
 
-You can invoke the custom tool’s API directly, as shown below, [ref link about Custom Code](https://cefengxu.github.io/hadk_readme/1-3_BasicConceptsDIYNode/):
+You can invoke the custom tool’s API directly, as shown below, [ref link about Custom Code](https://cefengxu.github.io/hadk_readme/1-3_BasicConceptsCustomNode/):
 
 ```c++
 

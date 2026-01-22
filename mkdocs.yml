@@ -36,7 +36,7 @@ nav:
   - Basic Concepts:
     - Chat Node: 1-1_BasicConceptsChatNode.md
     - Tool Node: 1-2_BasicConceptsToolNode.md
-    - Custom Node: 1-3_BasicConceptsDIYNode.md
+    - Custom Node: 1-3_BasicConceptsCustomNode.md
     - CE Node: 1-4_BasicConceptsCENode.md
     - Chain and Flow: 1-5_BasicConceptsChainFlow.md
     - Route: 1-6_BasicConceptsRoute.md
