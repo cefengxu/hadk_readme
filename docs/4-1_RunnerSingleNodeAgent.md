@@ -2,7 +2,7 @@
 
 ## Overview
 
-This module is a class-based refactoring of [single_node](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/single_node?ref_type=heads), converting the original function-based implementation into an object-oriented class format using the Runner pattern. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/single_node_cls?ref_type=heads)
+This module is a class-based refactoring of [single_node](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/single_node?ref_type=heads), converting the original function-based implementation into an object-oriented class format using the Runner pattern. [ref. link](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/single_node_rt?ref_type=heads)
 
 In this example, we construct a single Chat Node from HADK to materialize an Agent that can understand or invoke functions automatically according to user's query. This example implements an agent that generates responses using LLM with tool support in a single node workflow.
 

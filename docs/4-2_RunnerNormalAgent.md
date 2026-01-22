@@ -2,7 +2,7 @@
 
 ## Overview
 
-This module is a class-based refactoring of [normal_agent](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/normal_agent?ref_type=heads), converting the original function-based implementation into an object-oriented class format using the Runner pattern. [ref. link](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/main/src/normal_agent_cls?ref_type=heads)
+This module is a class-based refactoring of [normal_agent](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/normal_agent?ref_type=heads), converting the original function-based implementation into an object-oriented class format using the Runner pattern. [ref. link](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/main/src/normal_agent_rt?ref_type=heads)
 
 The normal agent demonstrates how to use HADK's sequential workflow to implement a two-stage question-answering system. This example implements an agent that generates responses using LLM with tool support, and then polishes the final answer.
 

@@ -6,11 +6,11 @@ HADK is a cross-platform development framework. This document provides complete 
 
 ## Cross-compilation Reference
 
-For complete cross-compilation examples and configurations, please refer to: [Cross-Compilation Agent Example](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/android?ref_type=heads)
+For complete cross-compilation examples and configurations, please refer to: [Cross-Compilation Agent Example](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_dylibs/-/tree/main?ref_type=heads)
 
 ## Agent Development
 
-For the agent implementation used, please refer to: [Single Node Agent Development Guide](https://gitlab.xpaas.lenovo.com/ai-now-team/hadk_dylibs/-/tree/android/src/single_node?ref_type=heads)
+For the agent implementation used, please refer to: [Single Node Agent Development Guide](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/tree/android/src/single_node?ref_type=heads)
 
 ## Android Studio Integration
 
