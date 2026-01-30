@@ -83,6 +83,30 @@ Execute the task.
   - `input`: Current user input
 - **Returns:** Task execution result (string pointer)
 
+**Input format (three ways to pass history and input):**
+
+1. **Text-only current turn**: `history` = history up to previous turn, `input` = current user text. Internally becomes `[[S],[U,A],[U,A,T,A],[U]]`.
+   - `history = [[S],[U,A],[U,A,T,A]]` ; `input = "hello"`
+
+2. **Current turn in history**: Last user message is in `history`, `input = nullptr`. Internally uses `[[S],[U,A],[U,A,T,A],[U]]` as-is.
+   - `history = [[S],[U,A],[U,A,T,A],[U]]` ; `input = nullptr`
+
+3. **Multimodal current turn**: Use way 2—put current turn (text + image etc.) in the last `[U]` of `history`, `input = nullptr`.
+
+**Multimodal U example** (content as array):
+```json
+{
+  "role": "user",
+  "content": [
+    {"type": "text", "text": "what is this image?"},
+    {
+      "type": "image_url",
+      "image_url": {"url": "data:image/png;base64,...", "detail": "low"}
+    }
+  ]
+}
+```
+
 #### `runner_release`
 
 ```cpp
