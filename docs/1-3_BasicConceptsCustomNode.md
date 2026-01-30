@@ -2,7 +2,7 @@
 
 ## Building a Custom Node
 
-You can build custom processing nodes using `CustomNode` to implement arbitrary business logic. `CustomNode` requires a callback function and supports preprocessor and postprocessor for flexible data transformation.
+You can build custom processing nodes using `CustomNode` to implement arbitrary business logic. `CustomNode` requires a callback function and supports preprocessor and postprocessor for flexible data transformation. pls reference the [link](https://gitlab.xpaas.lenovo.com/latc/Components/hybrid-agent-rumtime/hadk_apps/-/blob/main/src/reflector_agent_rt/src/koba_agent.cpp?ref_type=heads)
 
 ### Basic Usage
 

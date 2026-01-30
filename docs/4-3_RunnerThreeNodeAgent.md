@@ -9,7 +9,7 @@ The conditional routing agent demonstrates how to use HADK's conditional routing
 **Workflow Diagram:**
 ```
 Input → decide_node (Decision) → [Conditional Routing]
-                                  ├─ "search" → web_search_node (Web Search) → decide_node (Loop)
+                                  ├─ "search" → web_search_node (Web Search) → search_result_processor → decide_node (Loop)
                                   └─ "answer" → answer_node (Generate Answer) → Output
 ```
 
@@ -18,6 +18,7 @@ The key difference from `reflector_agent` is that this implementation uses:
 - **Class-based architecture**: The agent logic is encapsulated in a `KobaAgentTask` class that inherits from `hybrid_runner::task_base`
 - **Runner pattern**: Uses the Runner framework (`runner_init`, `runner_run`, `runner_release`) for task management and execution
 - **Structured history format**: Supports the new conversation history format `[[S],[U,A],[U,A,T,A]]` where each inner array represents a complete conversation turn
+- **Search result processing**: Adds a `search_result_processor` (CustomNode) to parse tool outputs and accumulate context before looping back to `decide_node`
 
 ## Environment Configuration
 
