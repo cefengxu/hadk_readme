@@ -7,8 +7,8 @@ Chat Node is a node component that integrates large language models (LLM) and fu
 Build a chat node in the following way, allowing parameter configuration for model invocation:
 
 ```c++
-chat_node::chat_node_settings s_generate;
-s_generate.llm_mode = chat_node::LLMMode::OpenAI;  //default
+chat_node::chat_node_settings s_generate = chat_node_default_settings();
+s_generate.llm_provider = lm_mode::OpenAI;  //default
 s_generate.llm_url = "http://3rd/api/chat";
 s_generate.llm_key = "3rdkey"; 
 s_generate.model = "gpt-4.1";
@@ -21,8 +21,8 @@ const auto generate_node = std::make_shared<chat_node::ChatNode<std::string, std
 Currently, two LLM Modes are supported, allowing you to use a local Ollama model via:
 
 ```c++
-chat_node::chat_node_settings s_generate;
-s_generate.llm_mode = chat_node::LLMMode::Ollama;
+chat_node::chat_node_settings s_generate = chat_node_default_settings();
+s_generate.llm_mode = lm_mode::Ollama;
 s_generate.model = "qwen3-vl:4b"; // model to use
 s_generate.llm_url = "http://127.0.0.1:11434/api/chat";
 s_generate.llm_key = "";

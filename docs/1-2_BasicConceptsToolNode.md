@@ -58,7 +58,7 @@ common_tools::tools::shutdown_all_servers();
 Tools can serve as Chat Node's Function Call functions, automatically judged and invoked by the model. By configuring as follows, Chat Node will have tool invocation capabilities:
 
 ```c++
-chat_node::chat_node_settings s;
+chat_node::chat_node_settings s = chat_node_default_settings();
 s.model = "gpt-4o-mini";
 s.temperature = 0.7;
 s.max_tokens = 4096;
