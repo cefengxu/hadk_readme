@@ -6,7 +6,7 @@
 );
 </code></pre> <h2 id=getting-tool-status-mcp-tools-only>Getting Tool Status (MCP Tools Only)</h2> <p>The function to get the initialization status of MCP tools is as follows:</p> <pre><code class=language-c++>int status = common_tools::tools::get_server_init_status(std::string(name));
 </code></pre> <p><strong>Parameter Description:</strong> - <code>name</code>: The unique identifier name of the tool (case-sensitive)</p> <p><strong>Return Value:</strong> - <code>1</code>: Initialization successful - <code>2</code>: Initialization failed - <code>0</code>: Initialization in progress - <code>-1</code>: Unknown status</p> <h2 id=closing-tools-mcp-tools-only>Closing Tools (MCP Tools Only)</h2> <p>The function to close all MCP tools is as follows:</p> <pre><code class=language-c++>common_tools::tools::shutdown_all_servers();
-</code></pre> <h2 id=executing-tools>Executing Tools</h2> <h3 id=automatic-invocation-via-chat-node>Automatic Invocation via Chat Node</h3> <p>Tools can serve as Chat Node's Function Call functions, automatically judged and invoked by the model. By configuring as follows, Chat Node will have tool invocation capabilities:</p> <pre><code class=language-c++>chat_node::chat_node_settings s;
+</code></pre> <h2 id=executing-tools>Executing Tools</h2> <h3 id=automatic-invocation-via-chat-node>Automatic Invocation via Chat Node</h3> <p>Tools can serve as Chat Node's Function Call functions, automatically judged and invoked by the model. By configuring as follows, Chat Node will have tool invocation capabilities:</p> <pre><code class=language-c++>chat_node::chat_node_settings s = chat_node_default_settings();
 s.model = &quot;gpt-4o-mini&quot;;
 s.temperature = 0.7;
 s.max_tokens = 4096;
