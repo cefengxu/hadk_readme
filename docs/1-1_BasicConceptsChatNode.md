@@ -39,6 +39,42 @@ export LLM_API_URL="https://xxx/v1/chat/completions"
 export LLM_API_KEY="sk-zkxxxa5944"
 ```
 
+## chat_node_settings Reference
+
+All Chat Node instances are configured through `chat_node::chat_node_settings`. Start from `chat_node_default_settings()` and override the fields you need. A typical full configuration looks like this:
+
+```c++
+chat_node::chat_node_settings settings = chat_node_default_settings();
+settings.llm_provider = lm_mode::OpenAI;
+// settings.llm_url = "https://api.xxx.com/v1/chat/completions";
+// settings.llm_key = "sk-xx";
+settings.model = "gemini-3.1-flash-lite-preview";
+settings.temperature = 0.7;
+settings.top_p = 0.95;
+settings.max_tokens = 8096;
+settings.tool_choice = "auto";
+settings.tools_json = cached_tools_json.c_str();  // OpenAI-style tools JSON (see tool calling docs)
+settings.enable_tools = false;
+settings.max_consecutive_tool_calls = 20;
+settings.node_name = "decide_node";
+const auto node = std::make_shared<chat_node::ChatNode<std::string, std::string>>(settings);
+```
+
+| Field | Description |
+| ----- | ----------- |
+| `llm_provider` | LLM backend mode, e.g. `lm_mode::OpenAI` (default) or `lm_mode::Ollama` as shown in the examples above. |
+| `llm_url` | HTTP endpoint for chat completions. Can be omitted when using `LLM_API_URL` / defaults. |
+| `llm_key` | API key for the provider. Can be omitted when using `LLM_API_KEY` or providers that do not require a key. |
+| `model` | Model identifier string accepted by the configured endpoint. |
+| `temperature` | Sampling temperature for the model. |
+| `top_p` | Nucleus sampling parameter. |
+| `max_tokens` | Upper bound on tokens generated in the completion. |
+| `tool_choice` | Tool-calling policy string in OpenAI style (e.g. `"none"`, `"auto"`, or a specific tool selection). |
+| `tools_json` | C string pointer to the JSON definition of tools (schemas / function list). Meaningful when `enable_tools` is true. |
+| `enable_tools` |When set to `true`, the Chat Node is allowed to invoke tools based on `tools_json` and `tool_choice`. When set to `false`, the LLM’s response will be returned directly without any tool invocation. |
+| `max_consecutive_tool_calls` | Maximum number of consecutive tool-call rounds in Chat Node execution (safety cap). |
+| `node_name` | Logical name for Chat Node ( tracing via Telemetry). |
+
 ## Chat Node Input and Output
 
 The default data type for both input and output is `std::string` (for custom data types, please refer to `Advanced Usage`).
