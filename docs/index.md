@@ -2,7 +2,7 @@
 
 Welcome to the HADK framework development documentation. 
 
-*We came here to code a Hybrid Agent and chew bubblegum... and I'm all out of bubblegum !*
+*Keep it simple. Tackle the complex !*
 
 ## What It Is
 
