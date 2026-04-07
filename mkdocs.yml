@@ -47,6 +47,7 @@ nav:
     - CoT Agent: 2-5_ApplicationDevelopmentCoTAgent.md
     - Batch Node: 2-6_ApplicationDevelopmentBatchNode.md
     - Chat Bot: 2-7_ApplicationChatBot.md
+    - Agent Skill: 2-8_AgentSkill.md
   - Android:
     - Android Platform: 3-1_AndroidPlatform.md
   - Runner:

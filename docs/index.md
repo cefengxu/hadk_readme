@@ -43,6 +43,7 @@ Welcome to the HADK framework development documentation.
 - [CoT Agent](2-5_ApplicationDevelopmentCoTAgent.md) - CoT (Chain of Thought) agent development example
 - [Batch Node](2-6_ApplicationDevelopmentBatchNode.md) - Batch Node development example
 - [Chat Bot](2-7_ApplicationChatBot.md) - Simple Chat Bot development example
+- [Agent Skill](2-8_AgentSkill.md) - Simple Chat Bot with Agent Skills
 
 ### Runner
 
