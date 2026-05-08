@@ -28,9 +28,11 @@ Welcome to the HADK framework development documentation.
 
 ### Basic Concepts
 
-- [Chat Node](1-1_BasicConceptsChatNode.md) - Chat node integrated with large language models
+- [Chat Node](1-1_BasicConceptsChatNode.md) - Chat node (Reason Action) integrated with large language models
+- [LLM Node](1-7_BasicConceptsLLMNode.md) - LLM node (LLM Raw data) integrated with large language models
 - [Tool Node](1-2_BasicConceptsToolNode.md) - Tool management node
 - [Custom Node](1-3_BasicConceptsCustomNode.md) - User-defined node for custom logic
+- [Embedding Node](1-4_BasicConceptsEmbeddingNode.md) - Embedding node
 - [Chain and Flow](1-5_BasicConceptsChainFlow.md) - Workflow management
 - [Route](1-6_BasicConceptsRoute.md) - Routing node
 
