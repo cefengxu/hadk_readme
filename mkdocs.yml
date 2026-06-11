@@ -57,6 +57,8 @@ nav:
     - Single Node Agent with Runner: 4-1_RunnerSingleNodeAgent.md
     - Normal Agent with Runner: 4-2_RunnerNormalAgent.md
     - Conditional Routing Agent with Runner: 4-3_RunnerThreeNodeAgent.md
+  - Hook:
+    - Hook Event: 5-1_HookEvent.md
 
 # 插件配置
 plugins:

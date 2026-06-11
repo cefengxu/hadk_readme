@@ -47,6 +47,10 @@ Welcome to the HADK framework development documentation.
 - [Chat Bot](2-7_ApplicationChatBot.md) - Simple Chat Bot development example
 - [Agent Skill](2-8_AgentSkill.md) - Simple Chat Bot with Agent Skills
 
+### Hook
+
+- [Hook Event](5-1_HookEvent.md) - Hook event input/output structure
+
 ### Runner
 
 - [Runner Introduction](4_RunnerIntroduction.md) - Runner framework overview and core concepts
