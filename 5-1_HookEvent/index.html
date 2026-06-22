@@ -83,11 +83,7 @@
     ]
   }
 }
-
-- matcher: accepts regular expressions.
-- Native Tools in HADK:  `hadk_read`, `hadk_write`, `hadk_edit`, `hadk_find`, `hadk_exec`
-
-</code></pre> <h2 id=sessionstart>SessionStart</h2> <h3 id=input-struction>Input Struction</h3> <pre><code>{}
+</code></pre> <ul> <li><strong>Native Tools in HADK</strong>: <code>hadk_read</code>, <code>hadk_write</code>, <code>hadk_edit</code>, <code>hadk_find</code>, <code>hadk_exec</code></li> <li><strong>matcher</strong>: Regular expression that filters which tool events trigger the hook (applies to <code>PreToolUse</code>, <code>PostToolUse</code>, etc.).</li> <li>Example: to match only <code>hadk_read</code> and <code>hadk_write</code>, set <code>"matcher": "hadk_read|hadk_write"</code></li> </ul> <h2 id=sessionstart>SessionStart</h2> <h3 id=input-struction>Input Struction</h3> <pre><code>{}
 </code></pre> <h3 id=output-struction>Output Struction</h3> <pre><code>{
     &quot;hookSpecificOutput&quot;: {
         &quot;hookEventName&quot;: &quot;SessionStart&quot;,
